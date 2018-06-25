@@ -41,7 +41,7 @@ public class CourseServiceImpl implements ICourseService{
 	 * 通过关键字查询课程信息
 	 */
 	@Override
-	public List<Course> findByKeyword(String keywords) throws Exception {
+	public List<Course> findCourseByKeyword(String keywords) throws Exception {
 		// TODO Auto-generated method stub
 		CourseExample example = new CourseExample();
 		//添加条件：name属性中包含keywords关键字
@@ -60,7 +60,7 @@ public class CourseServiceImpl implements ICourseService{
 		}else{
 			//插入
 			courseMapper.insert(course);
-		}	
+		}
 	}
 	/**
 	 * 通过id删除课程信息

@@ -1,5 +1,14 @@
 package com.briup.apps.poll.bean;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * POJO类     课程
+ * @author WE
+ *
+ */
+@ApiModel("课程类")
 public class Course {
     /**
      *
@@ -8,6 +17,7 @@ public class Course {
      *
      * @mbg.generated Mon Jun 25 17:09:52 CST 2018
      */
+	@ApiModelProperty(value="课程编号")
     private Long id;
 
     /**
@@ -17,6 +27,7 @@ public class Course {
      *
      * @mbg.generated Mon Jun 25 17:09:52 CST 2018
      */
+	@ApiModelProperty(value="课程名字")
     private String name;
 
     /**
@@ -26,6 +37,7 @@ public class Course {
      *
      * @mbg.generated Mon Jun 25 17:09:52 CST 2018
      */
+	@ApiModelProperty(value="课程周期")
     private Integer period;
 
     /**
@@ -35,6 +47,7 @@ public class Course {
      *
      * @mbg.generated Mon Jun 25 17:09:52 CST 2018
      */
+	@ApiModelProperty(value="课程描述")
     private String description;
 
     /**

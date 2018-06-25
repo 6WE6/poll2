@@ -1,5 +1,9 @@
 package com.briup.apps.poll.bean;
-
+/**
+ * POJO类    答题卡
+ * @author WE
+ *
+ */
 public class Options {
     /**
      *

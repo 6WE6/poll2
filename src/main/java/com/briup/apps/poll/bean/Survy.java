@@ -1,5 +1,9 @@
 package com.briup.apps.poll.bean;
-
+/**
+ * POJO类    课调
+ * @author WE
+ *
+ */
 public class Survy {
     /**
      *

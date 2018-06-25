@@ -1,5 +1,9 @@
 package com.briup.apps.poll.bean;
-
+/**
+ * POJO类    问题
+ * @author WE
+ *
+ */
 public class Question {
     /**
      *

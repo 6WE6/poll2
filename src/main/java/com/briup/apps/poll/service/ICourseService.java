@@ -29,10 +29,11 @@ public interface ICourseService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<Course> findByKeyword(String keywords) throws Exception;
+	List<Course> findCourseByKeyword(String keywords) throws Exception;
 	/**
 	 * 保存或修改课程信息
 	 * @param course
+	 * @return 
 	 * @throws Exception
 	 */
 	void saveOrUpdateCourse(Course course) throws Exception;

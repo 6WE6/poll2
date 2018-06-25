@@ -1,5 +1,9 @@
 package com.briup.apps.poll.bean;
-
+/**
+ * POJO类    问卷
+ * @author WE
+ *
+ */
 public class Questionnaire {
     /**
      *
