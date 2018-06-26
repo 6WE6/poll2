@@ -43,7 +43,7 @@ public class ClazzController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	
 	/**
 	 * 通过id查询班级信息
 	 * 
@@ -53,9 +53,10 @@ public class ClazzController {
 	@ApiOperation(value = "通过id查询班级信息")
 	@GetMapping("findClazzById")
 	public MsgResponse findClazzById(@RequestParam long id) {
+		Clazz clazz=new Clazz();
 		try {
-			clazzService.findClazzById(id);
-			return MsgResponse.success("success", "查询成功！");
+			clazz=clazzService.findClazzById(id);
+			return MsgResponse.success("success",clazz);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
@@ -109,7 +110,7 @@ public class ClazzController {
 	public MsgResponse deleteClazzById(@RequestParam long id) {
 		try {
 			clazzService.deleteClazzById(id);
-			return MsgResponse.success("success", "删除成功！");
+			return MsgResponse.success("success", null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
@@ -128,11 +129,11 @@ public class ClazzController {
 	public MsgResponse batchDeleteClazz(@RequestParam long[] ids) {
 		try {
 			clazzService.batchDeleteClazz(ids);
-			return MsgResponse.success("success", "批量删除成功");
+			return MsgResponse.success("success", null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-}
 
+}
