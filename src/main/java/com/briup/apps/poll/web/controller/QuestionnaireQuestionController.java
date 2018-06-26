@@ -29,7 +29,7 @@ public class QuestionnaireQuestionController {
      */
     @GetMapping("findAll")
     @ApiOperation(value = "获取全部")
-    public MsgResponse findAll(@RequestParam QuestionnaireQuestionExample QQ){
+    public MsgResponse findAll(QuestionnaireQuestionExample QQ){
         try{
             return new MsgResponse().success("200",questionnaireQuestionService.selectByExample(QQ));
         }catch (Exception e){
@@ -74,9 +74,23 @@ public class QuestionnaireQuestionController {
      */
     @PostMapping("update")
     @ApiOperation(value = "更新")
-    public MsgResponse update(@RequestParam QuestionnaireQuestion QQ){
+    public MsgResponse update(QuestionnaireQuestion QQ){
         try{
             return new MsgResponse().success("200",questionnaireQuestionService.updateByPrimaryKeySelective(QQ));
+        }catch (Exception e){
+            return new MsgResponse().success("500",e.toString());
+        }
+    }
+
+    /**
+     * 保存
+     * @return
+     */
+    @PostMapping("save")
+    @ApiOperation(value = "保存")
+    public MsgResponse save(QuestionnaireQuestion QQ){
+        try{
+            return new MsgResponse().success("200",questionnaireQuestionService.insert(QQ));
         }catch (Exception e){
             return new MsgResponse().success("500",e.toString());
         }
