@@ -1,6 +1,5 @@
 package com.briup.apps.poll.web.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,10 +101,9 @@ public class CourseController {
 	 * @param course
 	 * @return
 	 */
-	@ApiOperation(value="保存或更新年级信息")
+	@ApiOperation(value="保存或更新课程信息")
 	@PostMapping("saveOrUpdateCourse")
 	public MsgResponse saveOrUpdateCourse(Course course){
-		
 		try {
 			courseService.saveOrUpdateCourse(course);
 			return MsgResponse.success("success", course);

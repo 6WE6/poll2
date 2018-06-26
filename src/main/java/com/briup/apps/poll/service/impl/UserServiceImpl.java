@@ -40,21 +40,22 @@ public class UserServiceImpl implements IUserService{
 		// TODO Auto-generated method stub
 		UserExample example = new UserExample();
 		//添加条件：name属性中包含keywords关键字
-		example.createCriteria().andNameLike(keywords);
+		example.createCriteria().andNameLike("%"+keywords+"%");
 		return userMapper.selectByExample(example);
 	}
 	/**
 	 * 保存或更新用户信息
 	 */
 	@Override
-	public void saveOrUpdateUser(User User) throws Exception {
+	public void saveOrUpdateUser(User user) throws Exception {
 		// TODO Auto-generated method stub
-		if(User.getId()!=null){
+		User count= userMapper.selectByPrimaryKey(user.getId());
+		if(count!=null){
 			//更新
-			userMapper.updateByPrimaryKey(User);
+			userMapper.updateByPrimaryKey(user);
 		}else{
 			//插入
-			userMapper.insert(User);
+			userMapper.insert(user);
 		}
 	}
 	/**
@@ -69,7 +70,7 @@ public class UserServiceImpl implements IUserService{
 	 * 批量删除用户信息
 	 */
 	@Override
-	public void batchDeleteUser(List<Long> ids) throws Exception {
+	public void batchDeleteUser(Long[] ids) throws Exception {
 		// TODO Auto-generated method stub
 		//forEach循环遍历数组或集合
 		for(long id : ids){

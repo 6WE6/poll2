@@ -45,9 +45,9 @@ public interface IUserService {
 	void deleteUserById(long id) throws Exception;
 	/**
 	 * 批量删除用户信息
-	 * @param User
+	 * @param user
 	 * @throws Exception
 	 */
-	void batchDeleteUser(List<Long> ids) throws Exception;
+	void batchDeleteUser(Long[] ids) throws Exception;
 
 }
