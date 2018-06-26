@@ -56,9 +56,10 @@ public class ClazzController {
 	@ApiOperation(value = "通过id查询班级信息")
 	@GetMapping("findClazzById")
 	public MsgResponse findClazzById(@RequestParam long id) {
+		Clazz clazz=new Clazz();
 		try {
-			clazzService.findClazzById(id);
-			return MsgResponse.success("success",null);
+			clazz=clazzService.findClazzById(id);
+			return MsgResponse.success("success",clazz);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
