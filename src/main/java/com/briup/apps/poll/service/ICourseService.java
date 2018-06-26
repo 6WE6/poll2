@@ -48,7 +48,7 @@ public interface ICourseService {
 	 * @param course
 	 * @throws Exception
 	 */
-	void batchDeleteCourse(List<Long> ids) throws Exception;
+	void batchDeleteCourse(Long[] ids) throws Exception;
 	
 
 }

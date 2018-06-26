@@ -44,7 +44,7 @@ public class CourseServiceImpl implements ICourseService{
 	public List<Course> findCourseByKeyword(String keywords) throws Exception {
 		// TODO Auto-generated method stub
 		CourseExample example = new CourseExample();
-		//添加条件：name属性中包含keywords关键字
+		//添加条件：name属性中包含keywords关键字,模糊查询
 		example.createCriteria().andNameLike(keywords);
 		return courseMapper.selectByExampleWithBLOBs(example);
 	}
@@ -54,7 +54,8 @@ public class CourseServiceImpl implements ICourseService{
 	@Override
 	public void saveOrUpdateCourse(Course course) throws Exception {
 		// TODO Auto-generated method stub
-		if(course.getId()!=null){
+		Course count= courseMapper.selectByPrimaryKey(course.getId());
+		if(count!=null){
 			//更新
 			courseMapper.updateByPrimaryKey(course);
 		}else{
@@ -74,7 +75,7 @@ public class CourseServiceImpl implements ICourseService{
 	 * 批量删除课程信息
 	 */
 	@Override
-	public void batchDeleteCourse(List<Long> ids) throws Exception {
+	public void batchDeleteCourse(Long[] ids) throws Exception {
 		// TODO Auto-generated method stub
 		//forEach循环遍历数组或集合
 		for(long id : ids){
