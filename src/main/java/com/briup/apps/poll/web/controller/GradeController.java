@@ -111,14 +111,14 @@ public class GradeController {
 	 */
 	@ApiOperation(value = "保存或更新年级信息")
 	@PostMapping("saveOrUpdateGrade")
-	public String saveOrUpdateGrade(Grade grade) {
+	public MsgResponse saveOrUpdateGrade(Grade grade) {
 		try {
 			gradeService.saveOrUpdateGrade(grade);
-			return "操作成功";
+			return MsgResponse.success("success", null);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "操作失败！" + e.getMessage();
+			return MsgResponse.error(e.getMessage());
 		}
 	}
 
