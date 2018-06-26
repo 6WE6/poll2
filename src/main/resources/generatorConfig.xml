@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <!-- mybatis-generator的核心配置文件 -->
 <generatorConfiguration>
-  <classPathEntry location="E:/briup/respority/mysql/mysql-connector-java/5.1.46/mysql-connector-java-5.1.46.jar" />
+  <classPathEntry location="E:\Program Files\briup\repository\mysql\mysql-connector-java\5.1.46/mysql-connector-java-5.1.46.jar" />
   <context id="DB2Tables" targetRuntime="MyBatis3">
     <jdbcConnection driverClass="com.mysql.jdbc.Driver"
         connectionURL="jdbc:mysql://127.0.0.1:3306/poll2.0"
@@ -37,13 +37,16 @@
 	<table tableName="poll_answers" domainObjectName="Answers" ></table>
 	<table tableName="poll_survey" domainObjectName="Survey" ></table>
     <table tableName="poll_school" domainObjectName="School" ></table>
+	<!-- <table tableName="poll_answers" domainObjectName="Answers" ></table>
+	<table tableName="poll_survey" domainObjectName="Survey" ></table>
+    <table tableName="poll_school" domainObjectName="School" ></table> -->
     <table tableName="poll_grade" domainObjectName="Grade" ></table>
-    <table tableName="poll_clazz" domainObjectName="Clazz" ></table>
+    <!-- <table tableName="poll_clazz" domainObjectName="Clazz" ></table>
     <table tableName="poll_course" domainObjectName="Course" ></table>
     <table tableName="poll_user" domainObjectName="User" ></table>
 	<table tableName="poll_options" domainObjectName="Options" ></table>
     <table tableName="poll_question" domainObjectName="Question" ></table>
     <table tableName="poll_questionnaire" domainObjectName="Questionnaire" ></table>
-    <table tableName="poll_questionnaire_question" domainObjectName="QuestionnaireQuestion" ></table>
+    <table tableName="poll_questionnaire_question" domainObjectName="QuestionnaireQuestion" ></table> -->
   </context>
 </generatorConfiguration>
