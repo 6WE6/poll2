@@ -1,5 +1,6 @@
 package com.briup.apps.poll.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,9 +88,8 @@ public class CourseController {
 	@ApiOperation(value="通过关键字查询课程信息")
 	@GetMapping("findCourseByKeyword")
 	public MsgResponse findCourseByKeyword(@RequestParam String keywords){
-		Course course = new Course();
 		try {
-			course = (Course) courseService.findCourseByKeyword(keywords);
+			List<Course> course = courseService.findCourseByKeyword(keywords);
 			return MsgResponse.success("success", course);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -104,14 +104,15 @@ public class CourseController {
 	 */
 	@ApiOperation(value="保存或更新年级信息")
 	@PostMapping("saveOrUpdateCourse")
-	public String saveOrUpdateCourse(Course course){
+	public MsgResponse saveOrUpdateCourse(Course course){
+		
 		try {
 			courseService.saveOrUpdateCourse(course);
-			return "操作成功";
+			return MsgResponse.success("success", course);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "操作失败！"+e.getMessage();
+			return MsgResponse.error(e.getMessage());
 		}
 	}
 	/**
@@ -121,7 +122,7 @@ public class CourseController {
 	 */
 	@ApiOperation(value="批量删除课程信息")
 	@GetMapping("batchDeleteCourse")
-	public MsgResponse batchDeleteCoure(List<Long> ids){
+	public MsgResponse batchDeleteCoure(Long[] ids){
 		try {
 			courseService.batchDeleteCourse(ids);
 			return MsgResponse.success("success", ids);

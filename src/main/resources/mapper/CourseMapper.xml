@@ -331,4 +331,7 @@
       period = #{period,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="saveOrUpdateCourse" resultType="com.briup.apps.poll.bean.Course">
+     select count(*) from Course where id = #{id}
+  </select>
 </mapper>

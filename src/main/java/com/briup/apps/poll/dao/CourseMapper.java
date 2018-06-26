@@ -117,4 +117,10 @@ public interface CourseMapper {
      * @mbg.generated Mon Jun 25 17:09:52 CST 2018
      */
     int updateByPrimaryKey(Course record);
+    /**
+     * 
+     * @param course
+     * @return
+     */
+    long saveOrUpdateCourse(Course course);
 }
