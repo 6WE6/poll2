@@ -1,7 +1,7 @@
 package com.briup.apps.poll.bean;
 /**
  * POJO类    班级
- * @author WE
+ * @author LiXiaoFeng
  *
  */
 public class Clazz {

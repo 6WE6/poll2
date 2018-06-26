@@ -1,7 +1,7 @@
 package com.briup.apps.poll.bean;
 /**
  * POJO类    学校
- * @author WE
+ * @author Guo
  *
  */
 public class School {

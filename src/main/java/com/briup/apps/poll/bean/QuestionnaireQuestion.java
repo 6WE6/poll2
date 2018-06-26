@@ -1,7 +1,7 @@
 package com.briup.apps.poll.bean;
 /**
  * POJO类    问卷-问题(桥表)
- * @author WE
+ * @author Jia
  *
  */
 public class QuestionnaireQuestion {
