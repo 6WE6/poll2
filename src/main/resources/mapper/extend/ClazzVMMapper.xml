@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.briup.apps.poll.dao.extend.ClazzVMMapper">
-    <!-- 基础属性查询  id name description grade_id charge_id-->
-    <select id="selectAllClazz" resultMap="ClazzVMResult">
+    <!-- 查询所有班级信息和班级所从属的年级信息和班主任信息-->
+    <select id="selectAll" resultMap="ClazzVMResult">
         select * from poll_clazz
     </select>
     <!-- 定义结果集 -->
@@ -12,8 +12,40 @@
         <result column="name" property="name"/>
         <result column="description" property="description"/>
         <!-- 多对一中的关联属性 -->
-        <association column="grade_id" property="grade" select="com.briup.apps.poll.dao.GradeMapper.selectByPrimaryKey"/>
-        <!--  <association column="charge_id" property="charge" select="com.briup.apps.poll.dao.GradeMapper.selectByPrimaryKey"></association>-->
-    </resultMap>
+        <association 
+	        column="grade_id" 
+	        property="grade" 
+	        select="com.briup.apps.poll.dao.GradeMapper.selectByPrimaryKey">
+	     </association>
+        <association 
+	        column="charge_id" 
+	        property="charge" 
+	        select="com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey">
+	     </association>
+    </resultMap>  
+    <select id="selectClazzVMById" parameterType="java.lang.Long" resultMap="ClazzVMByIdResult">
+        select * from poll_clazz
+    </select>
+    <resultMap type="com.briup.apps.poll.bean.extend.ClazzVM" id="ClazzVMByIdResult">
+        <!-- 基础属性映射 -->
+        <association column="id" 
+	        property="id" 
+	        javaType="com.briup.apps.poll.bean.Clazz"
+	        select="com.briup.apps.poll.dao.ClazzMapper.selectByPrimaryKey">
+        </association>
+        <!-- 多对一中的关联属性 -->
+        <association 
+	        column="grade_id" 
+	        property="grade" 
+	        javaType="com.briup.apps.poll.bean.Grade"
+	        select="com.briup.apps.poll.dao.GradeMapper.selectByPrimaryKey">
+	     </association>
+        <association 
+	        column="charge_id" 
+	        property="charge"
+	        javaType="com.briup.apps.poll.bean.User" 
+	        select="com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey">
+	     </association>
+    </resultMap>  
     
 </mapper>
