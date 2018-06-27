@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.apps.poll.bean.Grade;
+import com.briup.apps.poll.bean.extend.GradeVM;
 import com.briup.apps.poll.service.IGradeService;
 import com.briup.apps.poll.util.MsgResponse;
 
@@ -35,7 +36,7 @@ public class GradeController {
 			// 返回成功信息
 			return MsgResponse.success("success", list);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// 失败信息
 			e.printStackTrace();
 			// 返回错误信息
 			return MsgResponse.error(e.getMessage());
@@ -54,9 +55,14 @@ public class GradeController {
 		Grade grade = new Grade();
 		try {
 			grade = gradeService.findGradeById(id);
-			return MsgResponse.success("success", grade);
+			if (grade == null) {
+				return MsgResponse.success("not find", grade);
+			} else {
+				return MsgResponse.success("success", grade);
+			}
+
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			//
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 		}
@@ -71,12 +77,18 @@ public class GradeController {
 	@ApiOperation(value = "通过id删除年级信息")
 	@GetMapping("deleteGradeById")
 	public MsgResponse deleteGradeById(@RequestParam long id) {
-		// 调用service层代码完成课程信息的删除
+		// 先查询id是否存在，确认后再删除
 		try {
-			gradeService.deleteGradeById(id);
-			return MsgResponse.success("success", null);
+			Grade grade = new Grade();
+			grade = gradeService.findGradeById(id);
+			if (grade == null) {
+				return MsgResponse.success("id not find", null);
+			} else {
+				gradeService.deleteGradeById(id);
+				return MsgResponse.success("success", null);
+			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			//
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 
@@ -94,10 +106,16 @@ public class GradeController {
 	public MsgResponse findGradeByKeyword(@RequestParam String keywords) {
 		List<Grade> list = new ArrayList<Grade>();
 		try {
+			// 判断list是否为空
 			list = gradeService.findGradeByKeyword(keywords);
-			return MsgResponse.success("success",list);
+			if (list.size() == 0) {
+				return MsgResponse.success("not find", list);
+			} else {
+				return MsgResponse.success("success", list);
+			}
+
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			//
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 		}
@@ -116,7 +134,7 @@ public class GradeController {
 			gradeService.saveOrUpdateGrade(grade);
 			return MsgResponse.success("success", null);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			//
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 		}
@@ -135,10 +153,44 @@ public class GradeController {
 			gradeService.batchDeleteGrade(ids);
 			return MsgResponse.success("success", ids);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			//
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 		}
+
+	}
+
+	/**
+	 * 根据年级查询学校
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@ApiOperation(value = "根据年级id查询所对应的学校")
+	@GetMapping("findSchoolbyGrade")
+	public MsgResponse findSchoolbyGrade(Long id) {
+		try {
+			GradeVM gradeVM = new GradeVM();
+			gradeVM = gradeService.findSchoolbyGrade(id);
+			return MsgResponse.success("success", gradeVM);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+
+	/**
+	 * 根据年级id查询班级信息
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@ApiOperation(value = "根据年级id查询班级信息")
+	@GetMapping("findClazzbyGrade")
+	public MsgResponse findClazzbyGrade(Long id) {
+		return null;
 
 	}
 

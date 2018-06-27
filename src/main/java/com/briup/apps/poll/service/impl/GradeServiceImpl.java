@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.briup.apps.poll.bean.Grade;
 import com.briup.apps.poll.bean.GradeExample;
+import com.briup.apps.poll.bean.extend.GradeVM;
 import com.briup.apps.poll.dao.GradeMapper;
+import com.briup.apps.poll.dao.extend.GradeVMMapper;
 import com.briup.apps.poll.service.IGradeService;
 
 /**
@@ -21,6 +23,9 @@ public class GradeServiceImpl implements IGradeService
 {
 	@Autowired
 	private GradeMapper gradeMapper;
+	
+	@Autowired
+	private GradeVMMapper gradeVMMapper;
 
 	/**
 	 * 查找所有年级信息
@@ -89,6 +94,15 @@ public class GradeServiceImpl implements IGradeService
 			gradeMapper.deleteByPrimaryKey(id);
 		}
 		
+	}
+	
+	/**
+	 *根据年级信息查询学校信息和年级信息 
+	 */
+	@Override
+	public GradeVM findSchoolbyGrade(Long id) throws Exception {
+		// 注意返回值
+		return gradeVMMapper.findSchoolbyGrade(id);
 	}
 	
 	
