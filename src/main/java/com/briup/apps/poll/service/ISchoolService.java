@@ -49,7 +49,7 @@ public interface ISchoolService {
 	 * @param school
 	 * @throws Exception
 	 */
-	void batchDeleteSchool(List<Long> ids) throws Exception;
+	void batchDeleteSchool(Long[] ids) throws Exception;
 }
  
 			

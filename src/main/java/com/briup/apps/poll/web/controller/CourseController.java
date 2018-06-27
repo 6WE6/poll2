@@ -129,7 +129,6 @@ public class CourseController {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 		}
-		
 	}
 	
 }

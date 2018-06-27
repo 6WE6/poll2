@@ -1,5 +1,6 @@
 package com.briup.apps.poll.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,11 @@ import com.briup.apps.poll.util.MsgResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+/**
+ * 视图控制层    课调
+ * @author yun
+ *
+ */
 @RestController
 @RequestMapping("/survey")
 @Api(description="课调相关接口")
@@ -27,10 +33,11 @@ public class SurveyController {
 	@GetMapping("findAllSurvey")
 	@ApiOperation(value="查询所有课调信息",notes="保存课调信息时无需输入id")
 	public MsgResponse findAllSurvey(){
+		List<Survey> surveys = new ArrayList<Survey>();
 		try {
-			List<Survey> list =surveyService.findAllSurvey();
+			surveys = surveyService.findAllSurvey();
 			//返回成功信息
-			return MsgResponse.success("success", list);
+			return MsgResponse.success("success",surveys);
 		} catch (Exception e) {
 			e.printStackTrace();
 			//返回错误信息
@@ -68,10 +75,9 @@ public class SurveyController {
 	@GetMapping("findSurveyByKeyword")
 	@ApiOperation(value="通过关键字查询课调信息")
 	public MsgResponse findSurveyByKeyword(@RequestParam String keywords){
-		Survey survey = new Survey();
 		try {
-			survey = (Survey) surveyService.findSurveyByKeyword(keywords);
-			return MsgResponse.success("success", survey);
+			List<Survey> surveys = surveyService.findSurveyByKeyword(keywords);
+			return MsgResponse.success("success", surveys);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
@@ -92,7 +98,7 @@ public class SurveyController {
 
 	@GetMapping("batchDeleteSurvey")
 	@ApiOperation(value="批量删除课调信息")
-	public MsgResponse batchDeleteCoure(List<Long> ids){
+	public MsgResponse batchDeleteCoure(Long[] ids){
 		try {
 			surveyService.batchDeleteSurvey(ids);
 			return MsgResponse.success("success", ids);

@@ -11,6 +11,11 @@ import com.briup.apps.poll.bean.SchoolExample;
 import com.briup.apps.poll.dao.SchoolMapper;
 import com.briup.apps.poll.service.ISchoolService;
 
+/**
+ * 业务逻辑接口实现    学校
+ * @author yun
+ *
+ */
 @Service("schoolService")
 public class SchoolServiceImpl implements ISchoolService {
 
@@ -72,7 +77,7 @@ public class SchoolServiceImpl implements ISchoolService {
 	 * 批量删除学校信息
 	 */
 	@Override
-	public void batchDeleteSchool(List<Long> ids) throws Exception {
+	public void batchDeleteSchool(Long[] ids) throws Exception {
 		//forEach循环遍历数组或集合
 		for(long id : ids){
 			schoolMapper.deleteByPrimaryKey(id);

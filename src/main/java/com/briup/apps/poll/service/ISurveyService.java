@@ -4,7 +4,10 @@ import java.util.List;
 
 import com.briup.apps.poll.bean.Survey;
 
-
+/**
+ * 业务逻辑接口实现    课调
+ * @author yun
+ */
 public interface ISurveyService {
 
 	/**
@@ -45,5 +48,5 @@ public interface ISurveyService {
 	 * @param survey
 	 * @throws Exception
 	 */
-	void batchDeleteSurvey(List<Long> ids) throws Exception;
+	void batchDeleteSurvey(Long[] ids) throws Exception;
 }

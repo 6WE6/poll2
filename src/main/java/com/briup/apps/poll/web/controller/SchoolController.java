@@ -1,5 +1,6 @@
 package com.briup.apps.poll.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,11 @@ import com.briup.apps.poll.util.MsgResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-
+/**
+ * 视图控制层    学校
+ * @author yun
+ *
+ */
 @RestController
 @RequestMapping("/school")
 @Api(description="学校相关接口")
@@ -69,10 +74,10 @@ public class SchoolController {
 	@GetMapping("findSchoolByKeyword")
 	@ApiOperation(value="通过关键字查询学校信息")
 	public MsgResponse findSchoolByKeyword(@RequestParam String keywords){
-		School school = new School();
+		List<School> schools = new ArrayList<>();
 		try {
-			school = (School) schoolService.findSchoolByKeyword(keywords);
-			return MsgResponse.success("success", school);
+			schools =  schoolService.findSchoolByKeyword(keywords);
+			return MsgResponse.success("success", schools);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
@@ -93,7 +98,7 @@ public class SchoolController {
 
 	@GetMapping("batchDeleteSchool")
 	@ApiOperation(value="批量删除学校信息")
-	public MsgResponse batchDeleteCoure(List<Long> ids){
+	public MsgResponse batchDeleteCoure(Long[] ids){
 		try {
 			schoolService.batchDeleteSchool(ids);
 			return MsgResponse.success("success", ids);

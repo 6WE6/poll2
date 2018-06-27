@@ -10,6 +10,10 @@ import com.briup.apps.poll.bean.SurveyExample;
 import com.briup.apps.poll.dao.SurveyMapper;
 import com.briup.apps.poll.service.ISurveyService;
 
+/**
+ * 业务逻辑处理接口   
+ * @author yun
+ */
 @Service
 public class SurveyServiceImpl implements ISurveyService{
 
@@ -37,7 +41,7 @@ public class SurveyServiceImpl implements ISurveyService{
 	@Override
 	public List<Survey> findSurveyByKeyword(String keywords) throws Exception {
 		SurveyExample example = new SurveyExample();
-		//添加条件：name属性中包含keywords关键字
+		//添加条件：code属性中包含keywords关键字
 		example.createCriteria().andCodeLike(keywords);
 		return surveyMapper.selectByExample(example);
 	}
@@ -65,7 +69,7 @@ public class SurveyServiceImpl implements ISurveyService{
 	 * 批量删除课调信息
 	 */
 	@Override
-	public void batchDeleteSurvey(List<Long> ids) throws Exception {
+	public void batchDeleteSurvey(Long[] ids) throws Exception {
 		//forEach循环遍历数组或集合
 		for(long id : ids){
 			surveyMapper.deleteByPrimaryKey(id);
