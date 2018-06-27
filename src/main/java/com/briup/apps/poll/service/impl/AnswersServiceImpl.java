@@ -2,19 +2,23 @@ package com.briup.apps.poll.service.impl;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.briup.apps.poll.bean.Answers;
 import com.briup.apps.poll.bean.AnswersExample;
+import com.briup.apps.poll.bean.extend.AnswersVM;
 import com.briup.apps.poll.dao.AnswersMapper;
+import com.briup.apps.poll.dao.extend.AnswersVMMapper;
 import com.briup.apps.poll.service.IAnswersService;
 
 @Service
 public class AnswersServiceImpl implements IAnswersService{
 	@Autowired
 	private AnswersMapper answersMapper;
-	
+	@Autowired
+	private AnswersVMMapper answersVMMapper;
 	/**
 	 * 按空模板查询所有答题卡信息(QBC查询)
 	 */
@@ -82,6 +86,15 @@ public class AnswersServiceImpl implements IAnswersService{
 		// TODO Auto-generated method stub
 		for(long id:ids)
 			answersMapper.deleteByPrimaryKey(id);
+	}
+	/*
+	 * 查询所有答题卡，包括问卷
+	 */
+	@Override
+	public List<AnswersVM> selectAllAnswersVM() throws Exception {
+		// TODO Auto-generated method stub
+		
+		return answersVMMapper.selectAll();
 	}
 
 	
