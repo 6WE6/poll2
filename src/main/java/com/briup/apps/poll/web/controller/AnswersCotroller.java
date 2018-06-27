@@ -2,6 +2,7 @@ package com.briup.apps.poll.web.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.apps.poll.bean.Answers;
+import com.briup.apps.poll.bean.extend.AnswersVM;
 import com.briup.apps.poll.service.IAnswersService;
 import com.briup.apps.poll.util.MsgResponse;
 
@@ -22,7 +24,21 @@ import io.swagger.annotations.ApiOperation;
 public class AnswersCotroller {
 	@Autowired
 	private IAnswersService answersService;
-
+	/*
+	 * 查询所有答题卡，包括问卷
+	 */
+	@ApiOperation(value="查询所有班答题卡",notes="答题卡携带调查问卷survey")
+	@GetMapping("findAllVM")
+	public MsgResponse findAllVM() {
+		try {
+			List<AnswersVM> list=answersService.selectAllAnswersVM();
+			return MsgResponse.success("success", list);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}		
+	}
 	/*
 	 * 查询所有答题卡
 	 */

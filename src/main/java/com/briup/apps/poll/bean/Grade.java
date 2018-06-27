@@ -1,5 +1,10 @@
 package com.briup.apps.poll.bean;
 
+/**
+ * pojo类   年级类
+ * @author psq
+ *
+ */
 public class Grade {
     /**
      *

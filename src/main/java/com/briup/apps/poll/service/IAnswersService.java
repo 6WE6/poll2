@@ -3,8 +3,13 @@ package com.briup.apps.poll.service;
 import java.util.List;
 
 import com.briup.apps.poll.bean.Answers;
+import com.briup.apps.poll.bean.extend.AnswersVM;
 
 public interface IAnswersService {
+	/*
+	 * 查询所有答题卡，包括问卷
+	 */
+	List<AnswersVM> selectAllAnswersVM() throws Exception; 
 	/*
 	 * 查询所有答题卡
 	 */

@@ -2,7 +2,8 @@ package com.briup.apps.poll.service;
 
 import java.util.List;
 
-import com.briup.apps.poll.bean.Grade;;
+import com.briup.apps.poll.bean.Grade;
+import com.briup.apps.poll.bean.extend.GradeVM;;
 
 /**
  * 业务逻辑处理接口  年级模块
@@ -54,6 +55,14 @@ public interface IGradeService
 	 * @throws Exception
 	 */
 	void batchDeleteGrade(List<Long> ids) throws Exception;
+	
+	/**
+	 * 根据年级信息查询学校和年级的信息
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	GradeVM findSchoolbyGrade(Long id) throws Exception;
 	
 
 }
