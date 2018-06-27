@@ -4,7 +4,7 @@
 
     <!-- 查询所有班级信息-->
     
-    <select id="selectAllClazz" resultMap="ClazzVMResult">
+    <select id="selectAll" resultMap="ClazzVMResult">
         select * from poll_clazz
     </select>
     <!-- 定义结果集 -->
