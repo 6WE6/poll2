@@ -32,7 +32,7 @@ public class ClazzServiceImpl implements IClazzService {
 	}
 
 	/**
-	 * 根据id查询所有班级信息
+	 * 根据id查询班级信息
 	 */
 
 	@Override
