@@ -2,10 +2,8 @@ package com.briup.apps.poll.service;
 
 import java.util.List;
 
-
 import com.briup.apps.poll.bean.Clazz;
 import com.briup.apps.poll.bean.extend.ClazzVM;
-
 
 /**
  * 业务逻辑处理接口 班级
@@ -18,14 +16,14 @@ public interface IClazzService {
 	 * 查询所有班级信息
 	 */
 	List<Clazz> findAllClazz() throws Exception;
-	
+
 	List<ClazzVM> findAllClazzVM() throws Exception;
 
 	/**
 	 * 通过id查询班级信息
 	 */
 	Clazz findClazzById(long id) throws Exception;
-	
+
 	ClazzVM findClazzVMById(long id) throws Exception;
 
 	/**
@@ -34,6 +32,8 @@ public interface IClazzService {
 	List<Clazz> query(String keywords) throws Exception;
 
 	List<Clazz> findClazzByKeyword(String keywords) throws Exception;
+
+	List<ClazzVM> findClazzVMByKeyword(String keywords) throws Exception;
 
 	/**
 	 * 保存或修改班级信息信息

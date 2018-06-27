@@ -3,8 +3,6 @@ package com.briup.apps.poll.service.impl;
 
 import java.util.List;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,12 +35,11 @@ public class ClazzServiceImpl implements IClazzService {
 		ClazzExample example = new ClazzExample();
 		return clazzMapper.selectByExampleWithBLOBs(example);
 	}
-	
+
 	@Override
 	public List<ClazzVM> findAllClazzVM() throws Exception {
 		return clazzVMMapper.selectAll();
 	}
-	
 
 	/**
 	 * 根据id查询所有班级信息
@@ -52,7 +49,7 @@ public class ClazzServiceImpl implements IClazzService {
 	public Clazz findClazzById(long id) throws Exception {
 		return clazzMapper.selectByPrimaryKey(id);
 	}
-	
+
 	@Override
 	public ClazzVM findClazzVMById(long id) throws Exception {
 		return clazzVMMapper.selectClazzVMById(id);
@@ -69,10 +66,8 @@ public class ClazzServiceImpl implements IClazzService {
 	}
 
 	@Override
-	public List<Clazz> findClazzByKeyword(String keywords) throws Exception {
-		ClazzExample example = new ClazzExample();
-		example.createCriteria().andNameLike(keywords);
-		return clazzMapper.selectByExampleWithBLOBs(example);
+	public List<ClazzVM> findClazzVMByKeyword(String keywords) throws Exception {
+		return clazzVMMapper.selectClazzByKeyword(keywords);
 	}
 
 	/**
@@ -110,9 +105,10 @@ public class ClazzServiceImpl implements IClazzService {
 		}
 	}
 
-	
+	@Override
+	public List<Clazz> findClazzByKeyword(String keywords) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	
-	
 }
-

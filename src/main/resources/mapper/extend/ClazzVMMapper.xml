@@ -2,45 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.briup.apps.poll.dao.extend.ClazzVMMapper">
 
-    <!-- 查询所有班级信息-->
-    
-    <select id="selectAll" resultMap="ClazzVMResult">
-        select * from poll_clazz
-    </select>
-    <!-- 定义结果集 -->
-    <resultMap type="com.briup.apps.poll.bean.extend.ClazzVM" id="ClazzVMResult">
-        <!-- 基础属性映射 -->
-        <id column="id" property="id"/>
-        <result column="name" property="name"/>
-        <result column="description" property="description"/>
-        <!-- 多对一中的关联属性 -->
-        <association column="grade_id" property="grade" select="com.briup.apps.poll.dao.GradeMapper.selectByPrimaryKey"/>
-        <association column="charge_id" property="charge" select="com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey"></association>
-    </resultMap>
-    
-    <!-- 根据id查询班级信息-->
-    
-    <select id="selectClazzVMById" resultMap="ClazzVMByIdResult">
-        select * from poll_clazz where id=#{id}
-    </select>
-    <!-- 定义结果集 -->
-    <resultMap type="com.briup.apps.poll.bean.extend.ClazzVM" id="ClazzVMByIdResult">
-        <!-- 基础属性映射 -->
-        <id column="id" property="id"/>
-        <result column="name" property="name"/>
-        <result column="description" property="description"/>
-        <!-- 多对一中的关联属性 -->
-        <association 
-            column="grade_id" 
-	        property="grade" 
-	        javaType="com.briup.apps.poll.bean.Grade"
-	        select="com.briup.apps.poll.dao.GradeMapper.selectByPrimaryKey"/>
-        <association 
-	        column="charge_id" 
-	        property="charge" 
-	        javaType="com.briup.apps.poll.bean.User"
-	        select="com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey">
-        </association>
-    </resultMap>
-    
+	<!-- 查询所有班级信息 -->
+
+	<select id="selectAll" resultMap="ClazzVMResult">
+		select * from poll_clazz
+	</select>
+
+	<!-- 根据id查询班级信息 -->
+
+	<select id="selectClazzVMById" resultMap="ClazzVMResult">
+		select * from poll_clazz where id=#{id}
+	</select>
+
+	<!-- 根据关键字查询班级信息 -->
+
+	<select id="selectClazzByKeyword" resultMap="ClazzVMResult">
+		SELECT * FROM poll_clazz WHERE name LIKE "%"#{name}"%";
+	</select>
+
+	<!-- 定义结果集 -->
+
+	<resultMap type="com.briup.apps.poll.bean.extend.ClazzVM" id="ClazzVMResult">
+		<!-- 基础属性映射 -->
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="description" property="description" />
+		<!-- 多对一中的关联属性 -->
+		<association column="grade_id" property="grade"
+			select="com.briup.apps.poll.dao.GradeMapper.selectByPrimaryKey" />
+		<association column="charge_id" property="charge"
+			select="com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey"></association>
+	</resultMap>
+
+
 </mapper>

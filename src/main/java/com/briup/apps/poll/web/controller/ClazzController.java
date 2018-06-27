@@ -26,18 +26,17 @@ import io.swagger.annotations.ApiOperation;
 public class ClazzController {
 	@Autowired
 	private IClazzService clazzService;
-	
 
 	/**
 	 * 查询所有班级信息
 	 * 
 	 * @return
 	 */
-	@ApiOperation(value = "查询所有班级信息",notes="班级中携带年级所属班级信息和班主任信息")
+	@ApiOperation(value = "查询所有班级信息", notes = "班级中携带年级所属班级信息和班主任信息")
 	@GetMapping("findAllClazzVM")
 	public MsgResponse findAllClazzVM() {
 		try {
-			List<ClazzVM> list=clazzService.findAllClazzVM();
+			List<ClazzVM> list = clazzService.findAllClazzVM();
 			// 返回成功信息
 			return MsgResponse.success("success", list);
 		} catch (Exception e) {
@@ -46,8 +45,7 @@ public class ClazzController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-	
-	
+
 	@ApiOperation(value = "查询所有班级信息")
 	@GetMapping("findAllClazz")
 	public MsgResponse findAllClazz() {
@@ -61,36 +59,35 @@ public class ClazzController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * 通过id查询班级信息
 	 * 
 	 * @param id
 	 * @return
 	 */
-	
-	@ApiOperation(value = "通过id查询班级信息",notes="班级中携带年级所属班级信息和班主任信息")
+
+	@ApiOperation(value = "通过id查询班级信息", notes = "班级中携带年级所属班级信息和班主任信息")
 	@GetMapping("findClazzVMById")
 	public MsgResponse findClazzVMById(@RequestParam long id) {
-		ClazzVM clazzVM=new ClazzVM();
+		ClazzVM clazzVM = new ClazzVM();
 		try {
-			clazzVM=clazzService.findClazzVMById(id);
-			return MsgResponse.success("success",clazzVM);
+			clazzVM = clazzService.findClazzVMById(id);
+			return MsgResponse.success("success", clazzVM);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-	
-	
+
 	@ApiOperation(value = "通过id查询班级信息")
 	@GetMapping("findClazzById")
 	public MsgResponse findClazzById(@RequestParam long id) {
-		Clazz clazz=new Clazz();
+		Clazz clazz = new Clazz();
 		try {
 
-			clazz=clazzService.findClazzById(id);
-			return MsgResponse.success("success",clazz);
+			clazz = clazzService.findClazzById(id);
+			return MsgResponse.success("success", clazz);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
@@ -103,6 +100,18 @@ public class ClazzController {
 	 * @param keyWords
 	 * @return
 	 */
+	@ApiOperation(value = "根据关键字查询班级信息", notes = "输入name中关键字进行查询,班级中携带年级所属班级信息和班主任信息")
+	@GetMapping("findClazzVMByKeyword")
+	public MsgResponse findClazzVMByKeyword(@RequestParam String keyWords) {
+		try {
+			List<ClazzVM> list = clazzService.findClazzVMByKeyword(keyWords);
+			return MsgResponse.success("success", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+
 	@ApiOperation(value = "根据关键字查询班级信息", notes = "输入name中关键字进行查询")
 	@GetMapping("findClazzByKeyword")
 	public MsgResponse findClazzByKeyword(@RequestParam String keyWords) {
@@ -171,4 +180,3 @@ public class ClazzController {
 	}
 
 }
-
