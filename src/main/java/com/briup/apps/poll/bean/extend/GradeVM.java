@@ -50,7 +50,7 @@ public class GradeVM implements Serializable  {
 
 	public GradeVM() {
 		super();
-		// TODO Auto-generated constructor stub
+		// 
 	}
 
 	public GradeVM(School school, Grade grade) {
