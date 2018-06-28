@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.apps.poll.bean.Survey;
+import com.briup.apps.poll.bean.extend.SurveyVM;
 import com.briup.apps.poll.service.ISurveyService;
 import com.briup.apps.poll.util.MsgResponse;
 
@@ -98,10 +99,34 @@ public class SurveyController {
 
 	@GetMapping("batchDeleteSurvey")
 	@ApiOperation(value="批量删除课调信息")
-	public MsgResponse batchDeleteCoure(Long[] ids){
+	public MsgResponse batchDeleteSurvey(Long[] ids){
 		try {
 			surveyService.batchDeleteSurvey(ids);
 			return MsgResponse.success("success", ids);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+
+	@GetMapping("findAllSurveyVM")
+	@ApiOperation(value="获得所有的课调详细信息")
+	public MsgResponse findAllSurveyVM(){
+		try {
+			List<SurveyVM> surveyVMs = surveyService.findAllSurveyVM();
+			return MsgResponse.success("success", surveyVMs);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
+	@GetMapping("findSurveyVMByKeyword")
+	@ApiOperation(value="通过关键字获得所有的课调详细信息")
+	public MsgResponse findSurveyVMByKeyword(@RequestParam String keywords){
+		try {
+			List<SurveyVM> surveyVMs = surveyService.findSurveyVMByKeyword(keywords);
+			return MsgResponse.success("success", surveyVMs);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());

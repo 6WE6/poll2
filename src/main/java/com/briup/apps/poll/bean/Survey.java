@@ -17,7 +17,7 @@ public class Survey {
 	@ApiModelProperty(value="课调的状态，1为未开始，2为进行中，3为结束")
     private String status;
 
-	@ApiModelProperty(value="")
+	@ApiModelProperty(value="课调编码，kd201862701")
     private String code;
 
 	@ApiModelProperty(value="课调的日期，类型为sting")

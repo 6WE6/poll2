@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.apps.poll.dao.extend.SurveyVMMapper">
+	<select id="findAll" resultMap="surveyVMResultType">
+		select
+			g.name g_name,c1.name c1_name,c2.name c2_name,q.name q_name,u.name u_name,s.surveydate s_surveydate,
+			s.status s_status,s.code s_code,
+			s.id s_id,c1.id c1_id,c2.id c2_id,u.id u_id,q.id q_id,g.id g_id
+		from 
+			poll_survey s,
+			poll_user u ,
+			poll_clazz c1 ,
+			poll_grade g,
+			poll_course c2,
+			poll_questionnaire q
+		where
+			s.user_id = u.id 
+		and 
+			s.clazz_id = c1.id
+		and
+			c1.grade_id = g.id 
+		and
+			s.course_id =c2.id 
+		and 
+			s.questionnaire_id = q.id
+	</select>
+
+	<select id="findSurveyByKeyword" resultMap="surveyVMResultType"
+		parameterType="java.lang.String">
+		select
+			g.name g_name,c1.name c1_name,c2.name c2_name,q.name q_name,u.name u_name,s.surveydate s_surveydate,
+			s.status s_status,s.code s_code,
+			s.id s_id,c1.id c1_id,c2.id c2_id,u.id u_id,q.id q_id,g.id g_id
+		from 
+			poll_survey s, poll_user u , poll_clazz c1 ,poll_grade g,poll_course c2 ,poll_questionnaire q
+		where 
+			s.user_id = u.id 
+		and
+			s.clazz_id = c1.id 
+		and 
+			c1.grade_id = g.id 
+		and
+			s.course_id = c2.id 
+		and
+			s.questionnaire_id = q.id 
+		or
+			g.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' ) 
+		or 
+			c1.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' ) 
+		or
+			c2.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' ) 
+		or 
+			q.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' ) 
+		or
+			u.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' ) 
+		or
+			s.surveyDate like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' )
+	</select>
+	<resultMap id="surveyVMResultType" type="com.briup.apps.poll.bean.extend.SurveyVM">
+
+		<association property="grade" javaType="com.briup.apps.poll.bean.Grade">
+			<id column="g_id" property="id" />
+			<result column="g_name" property="name" />
+		</association>
+
+		<association property="survey" javaType="com.briup.apps.poll.bean.Survey">
+			<id column="s_id" property="id" />
+			<result column="s_code" property="code" />
+			<result column="s_status" property="status" />
+			<result column="s_surveydate" property="surveydate" />
+		</association>
+
+		<association property="course" javaType="com.briup.apps.poll.bean.Course">
+			<id column="c2_id" property="id" />
+			<result column="c2_name" property="name" />
+		</association>
+
+		<association property="clazz" javaType="com.briup.apps.poll.bean.Clazz">
+			<id column="c1_id" property="id" />
+			<result column="c1_name" property="name" />
+		</association>
+
+		<association property="user" javaType="com.briup.apps.poll.bean.User">
+			<id column="u_id" property="id" />
+			<result column="u_name" property="name" />
+		</association>
+
+		<association property="questionnaire"
+			javaType="com.briup.apps.poll.bean.Questionnaire">
+			<id column="q_id" property="id" />
+			<result column="q_name" property="name" />
+		</association>
+
+	</resultMap>
+</mapper>

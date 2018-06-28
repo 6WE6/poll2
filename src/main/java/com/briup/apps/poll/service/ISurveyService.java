@@ -3,6 +3,7 @@ package com.briup.apps.poll.service;
 import java.util.List;
 
 import com.briup.apps.poll.bean.Survey;
+import com.briup.apps.poll.bean.extend.SurveyVM;
 
 /**
  * 业务逻辑接口实现    课调
@@ -49,4 +50,17 @@ public interface ISurveyService {
 	 * @throws Exception
 	 */
 	void batchDeleteSurvey(Long[] ids) throws Exception;
+
+	/**
+	 * 查询所有课调详细信息
+	 * @return
+	 * @throws Exception
+	 */
+	List<SurveyVM> findAllSurveyVM() throws Exception;
+	/**
+	 * 根据关键字查询所有课调详细信息
+	 * @return
+	 * @throws Exception
+	 */
+	List<SurveyVM> findSurveyVMByKeyword(String keywords) throws Exception;
 }
