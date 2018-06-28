@@ -72,7 +72,7 @@ public class QuestionController {
 	@PostMapping("saveOrUpdataQuestionVM")
 	public MsgResponse saveOrUpdataQuestionVM(QuestionVM questionVM) {
 		try {
-			questionService.saveOrUpdataQuestionVM(questionVM);;
+			questionService.saveOrUpdataQuestionVM(questionVM);
 			return MsgResponse.success("success", "操作成功");
 		} catch (Exception e) {
 			e.printStackTrace();

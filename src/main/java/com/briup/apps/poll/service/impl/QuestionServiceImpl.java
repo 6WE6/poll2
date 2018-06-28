@@ -2,6 +2,7 @@ package com.briup.apps.poll.service.impl;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,6 @@ import com.briup.apps.poll.dao.OptionsMapper;
 import com.briup.apps.poll.dao.QuestionMapper;
 import com.briup.apps.poll.dao.extend.QuestionVMMapper;
 import com.briup.apps.poll.service.IQuestionService;
-import com.mysql.jdbc.StringUtils;
 
 /**
  * 业务逻辑接口实现  问题
