@@ -132,5 +132,29 @@ public class SurveyController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
+
+	@GetMapping("findAllByIdAnswers")
+	@ApiOperation(value="通过id获得所有的课调的答题卡")
+	public MsgResponse findAllByIdAnswers(@RequestParam Long id){
+		try {
+			List<SurveyVM> surveyVMs = surveyService.findAllByIdAnswers(id);
+			return MsgResponse.success("success", surveyVMs);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
+	@GetMapping("findByIdSurveyVM")
+	@ApiOperation(value="通过id获得课调")
+	public MsgResponse findByIdSurveyVM(@RequestParam Long id){
+		try {
+			SurveyVM surveyVM = surveyService.findByIdSurveyVM(id);
+			return MsgResponse.success("success", surveyVM);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
 	
 }

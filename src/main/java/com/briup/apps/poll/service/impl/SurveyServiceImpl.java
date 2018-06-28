@@ -8,7 +8,12 @@ import org.springframework.stereotype.Service;
 import com.briup.apps.poll.bean.Survey;
 import com.briup.apps.poll.bean.SurveyExample;
 import com.briup.apps.poll.bean.extend.SurveyVM;
+import com.briup.apps.poll.dao.ClazzMapper;
+import com.briup.apps.poll.dao.CourseMapper;
+import com.briup.apps.poll.dao.GradeMapper;
+import com.briup.apps.poll.dao.QuestionnaireMapper;
 import com.briup.apps.poll.dao.SurveyMapper;
+import com.briup.apps.poll.dao.UserMapper;
 import com.briup.apps.poll.dao.extend.SurveyVMMapper;
 import com.briup.apps.poll.service.ISurveyService;
 
@@ -88,9 +93,35 @@ public class SurveyServiceImpl implements ISurveyService{
 	public List<SurveyVM> findAllSurveyVM() throws Exception {
 		return surveyVMMapper.findAll();
 	}
+	/**
+	 * 查询所有课调详细信息通过关键字
+	 * @return
+	 * @throws Exception
+	 */
 	@Override
 	public List<SurveyVM> findSurveyVMByKeyword(String keywords) throws Exception {
 		return surveyVMMapper.findSurveyByKeyword(keywords);
 	}
+
+	/**
+	 * 查询所有课调详细信息通过id
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public List<SurveyVM> findAllByIdAnswers(Long id) throws Exception {
+		return surveyVMMapper.findAllByIdAnswers(id);
+	}
+
+	/**
+	 * 查询所有课调详细信息通过id
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public SurveyVM findByIdSurveyVM(Long id) throws Exception {
+		return surveyVMMapper.findById(id);
+	}
+
 
 }

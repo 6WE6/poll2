@@ -11,4 +11,6 @@ import com.briup.apps.poll.bean.extend.SurveyVM;
 public interface SurveyVMMapper {
 	List<SurveyVM> findAll();
 	List<SurveyVM> findSurveyByKeyword(String keywords);
+	List<SurveyVM> findAllByIdAnswers(Long id);
+	SurveyVM findById(Long id);
 }

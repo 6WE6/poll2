@@ -63,4 +63,17 @@ public interface ISurveyService {
 	 * @throws Exception
 	 */
 	List<SurveyVM> findSurveyVMByKeyword(String keywords) throws Exception;
+	/**
+	 * 根据id查询所有课调下的答题卡
+	 * @return
+	 * @throws Exception
+	 */
+	List<SurveyVM> findAllByIdAnswers(Long id) throws Exception;
+	/**
+	 * 根据id查询所有课调的详细信息
+	 * @return
+	 * @throws Exception
+	 */
+	SurveyVM findByIdSurveyVM(Long id) throws Exception;
+
 }
