@@ -36,6 +36,14 @@ public interface IQuestionService {
 	List<QuestionVM> findQuestionVMByKeyword(String keyword) throws Exception;
 	
 	/**
+	 * 通过问卷 id 查找问卷下的所有问题
+	 * @param questionnaireId 问卷 id
+	 * @return
+	 * @throws Exception
+	 */
+	List<QuestionVM> findQuestionVMByQuestionnaireId(long questionnaireId) throws Exception;
+	
+	/**
 	 * 保存或修改问题信息，包括关联的选项
 	 * @param questionVM
 	 * @throws Exception

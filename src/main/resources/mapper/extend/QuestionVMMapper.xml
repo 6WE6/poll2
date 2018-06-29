@@ -44,5 +44,11 @@
 		select * from poll_question where name like concat('%',#{keyword},'%') union
 		select q.* from poll_question as q left join poll_options as o on q.id = o.question_id where o.name like concat('%',#{keyword},'%')
 	</select>
+	
+	<select id="selectQuestionVMByQuestionnaireId" parameterType="long" resultMap="questionVM">
+		select * from poll_question as qu
+		join poll_qq as qq on qu.id = qq.question_id
+		where qq.questionnaire_id = #{questionnaireId};
+	</select>
 
 </mapper>

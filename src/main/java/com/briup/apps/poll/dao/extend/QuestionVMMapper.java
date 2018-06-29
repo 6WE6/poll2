@@ -33,6 +33,13 @@ public interface QuestionVMMapper {
 	List<QuestionVM> selectLikeKeyword(String keyword);
 	
 	/**
+	 * 通过问卷 id 查找问卷下的所有问题
+	 * @param questionnaireId
+	 * @return
+	 */
+	List<QuestionVM> selectQuestionVMByQuestionnaireId(long questionnaireId);
+	
+	/**
 	 * 新增问题
 	 * @param questionVM
 	 */

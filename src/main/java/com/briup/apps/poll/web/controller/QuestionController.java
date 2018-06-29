@@ -82,6 +82,23 @@ public class QuestionController {
 	}
 	
 	/**
+	 * 通过问卷 id 查找问卷下的所有问题
+	 * @param questionnaireId 问卷 id
+	 * @return
+	 */
+	@ApiOperation(value = "通过问卷 id 查找问卷下的所有问题", notes = "")
+	@GetMapping("findQuestionVMByQuestionnaireId")
+	public MsgResponse findQuestionVMByQuestionnaireId(@RequestParam long questionnaireId) {
+		try {
+			List<QuestionVM> questionVM = questionService.findQuestionVMByQuestionnaireId(questionnaireId);
+			return MsgResponse.success("success", questionVM);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
+	/**
 	 * 保存或修改问题信息，包括关联的选项
 	 * @param questionVM
 	 * @return

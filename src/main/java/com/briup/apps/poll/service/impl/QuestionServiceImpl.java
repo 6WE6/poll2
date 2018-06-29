@@ -62,6 +62,18 @@ public class QuestionServiceImpl implements IQuestionService {
 	public List<QuestionVM> findQuestionVMByKeyword(String keyword) throws Exception {
 		return questionVMMapper.selectLikeKeyword(keyword);
 	}
+	
+
+	/**
+	 * 通过问卷 id 查找问卷下的所有问题
+	 * @param questionnaireId 问卷 id
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public List<QuestionVM> findQuestionVMByQuestionnaireId(long questionnaireId) throws Exception {
+		return questionVMMapper.selectQuestionVMByQuestionnaireId(questionnaireId);
+	}
 
 	/**
 	 * 保存或修改问题信息，包括关联的选项
