@@ -8,6 +8,10 @@
 		<result property="questionType" column="questionType" javaType="String" />
 		<collection property="options" column="id" select="selectOptionsByQid" ofType="com.briup.apps.poll.bean.Options"></collection>
 	</resultMap>
+	
+	<resultMap type="com.briup.apps.poll.bean.Options" id="optionsVM">
+		<result property="questionId" column="question_id" />
+	</resultMap>
 
 	<select id="selectAllQuestionVM" resultMap="questionVM">
 		select * from poll_question
@@ -17,7 +21,7 @@
 		select * from poll_question where id = #{id}
 	</select>
 	
-	<select id="selectOptionsByQid" parameterType="long" resultType="com.briup.apps.poll.bean.Options">
+	<select id="selectOptionsByQid" parameterType="long" resultMap="optionsVM">
 		select * from poll_options where question_id = #{id}
 	</select>
 	
@@ -35,5 +39,10 @@
 	<delete id="deleteById" parameterType="long">
 		delete from poll_question where id = #{id}
 	</delete>
+	
+	<select id="selectLikeKeyword" parameterType="String" resultMap="questionVM">
+		select * from poll_question where name like concat('%',#{keyword},'%') union
+		select q.* from poll_question as q left join poll_options as o on q.id = o.question_id where o.name like concat('%',#{keyword},'%')
+	</select>
 
 </mapper>

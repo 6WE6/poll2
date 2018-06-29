@@ -28,6 +28,14 @@ public interface IQuestionService {
 	QuestionVM findQuestionVMById(long id) throws Exception;
 	
 	/**
+	 * 通过关键字模糊查询，包括关联的选项,关键字的索引列有 QuestionVM.name（问题的标题）和 Options.name（选项的内容）
+	 * @param keyword
+	 * @return
+	 * @throws Exception
+	 */
+	List<QuestionVM> findQuestionVMByKeyword(String keyword) throws Exception;
+	
+	/**
 	 * 保存或修改问题信息，包括关联的选项
 	 * @param questionVM
 	 * @throws Exception

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.apps.poll.bean.Question;
@@ -56,6 +57,23 @@ public class QuestionController {
 	public MsgResponse findQuestionVMById(long id) {
 		try {
 			QuestionVM questionVM = questionService.findQuestionVMById(id);
+			return MsgResponse.success("success", questionVM);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
+	/**
+	 * 通过关键字模糊查询，包括关联的选项,关键字的索引列有 QuestionVM.name（问题的标题）和 Options.name（选项的内容）
+	 * @param keyword
+	 * @return
+	 */
+	@ApiOperation(value = "通过关键字模糊查询，包括关联的选项", notes = "关键字的索引列有 QuestionVM.name（问题的标题）和 Options.name（选项的内容）")
+	@GetMapping("findQuestionVMByKeyword")
+	public MsgResponse findQuestionVMByKeyword(@RequestParam String keyword) {
+		try {
+			List<QuestionVM> questionVM = questionService.findQuestionVMByKeyword(keyword);
 			return MsgResponse.success("success", questionVM);
 		} catch (Exception e) {
 			e.printStackTrace();
