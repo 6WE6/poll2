@@ -85,15 +85,20 @@ public class SurveyController {
 		}		
 	}
 
+	/**
+	 * 保存或修改课调信息
+	 * @param survey
+	 * @return
+	 */
 	@PostMapping("saveOrUpdateSurvey")
-	@ApiOperation(value="保存或更新年级信息，如果是保存新课调信息，请不要填id！")
-	public String saveOrUpdateSurvey(Survey survey){
+	@ApiOperation(value="保存或更新课调信息，如果是保存新课调信息，请不要填id！")
+	public MsgResponse saveOrUpdateSurvey(Survey survey){
 		try {
 			surveyService.saveOrUpdateSurvey(survey);
-			return "操作成功";
+			return MsgResponse.success("success", null);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "操作失败！"+e.getMessage();
+			return MsgResponse.error(e.getMessage());
 		}
 	}
 
