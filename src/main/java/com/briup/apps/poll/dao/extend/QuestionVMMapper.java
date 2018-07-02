@@ -26,6 +26,20 @@ public interface QuestionVMMapper {
 	QuestionVM selectQuestionVMById(long id);
 	
 	/**
+	 * 通过关键字模糊查询，包括关联的选项,关键字的索引列有 QuestionVM.name（问题的标题）和 Options.name（选项的内容）
+	 * @param keyword
+	 * @return
+	 */
+	List<QuestionVM> selectLikeKeyword(String keyword);
+	
+	/**
+	 * 通过问卷 id 查找问卷下的所有问题
+	 * @param questionnaireId
+	 * @return
+	 */
+	List<QuestionVM> selectQuestionVMByQuestionnaireId(long questionnaireId);
+	
+	/**
 	 * 新增问题
 	 * @param questionVM
 	 */

@@ -53,6 +53,29 @@ public class QuestionServiceImpl implements IQuestionService {
 	}
 	
 	/**
+	 * 通过关键字模糊查询，包括关联的选项,关键字的索引列有 QuestionVM.name（问题的标题）和 Options.name（选项的内容）
+	 * @param keyword
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public List<QuestionVM> findQuestionVMByKeyword(String keyword) throws Exception {
+		return questionVMMapper.selectLikeKeyword(keyword);
+	}
+	
+
+	/**
+	 * 通过问卷 id 查找问卷下的所有问题
+	 * @param questionnaireId 问卷 id
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public List<QuestionVM> findQuestionVMByQuestionnaireId(long questionnaireId) throws Exception {
+		return questionVMMapper.selectQuestionVMByQuestionnaireId(questionnaireId);
+	}
+
+	/**
 	 * 保存或修改问题信息，包括关联的选项
 	 * @param questionVM
 	 * @throws Exception
