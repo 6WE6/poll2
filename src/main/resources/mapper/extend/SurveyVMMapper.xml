@@ -66,9 +66,10 @@
 		 select="com.briup.apps.poll.dao.CourseMapper.selectByPrimaryKey">
 		</association>
 
-		<association property="clazz" javaType="com.briup.apps.poll.bean.Clazz"
+		<!-- psq修改  完善查询clazz-->
+		<association property="clazzVM"  javaType="com.briup.apps.poll.bean.extend.ClazzVM"
 			column="clazz_id" 
-			select="com.briup.apps.poll.dao.ClazzMapper.selectByPrimaryKey">
+			select="com.briup.apps.poll.dao.extend.ClazzVMMapper.selectClazzVMById">
 		</association>
 
 		<association property="user" javaType="com.briup.apps.poll.bean.User"
@@ -76,6 +77,7 @@
 			select="com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey">
 		</association>
 
+		<!-- psq修改 完善查询问卷调查表信息 -->
 		<association property="questionnaire" javaType="com.briup.apps.poll.bean.Questionnaire"
 			column="questionnaire_id"
 			select="com.briup.apps.poll.dao.QuestionnaireMapper.selectByPrimaryKey">

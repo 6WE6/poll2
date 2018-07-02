@@ -35,7 +35,7 @@ public class SurveyVM {
 	private Course course;
 
 	@ApiModelProperty(value="课调的班级")
-	private Clazz clazz;
+	private ClazzVM clazzVM;
 
 	@ApiModelProperty(value="被课调的老师")
 	private User user;
@@ -94,12 +94,12 @@ public class SurveyVM {
 		this.course = course;
 	}
 
-	public Clazz getClazz() {
-		return clazz;
+	public ClazzVM getClazzVM() {
+		return clazzVM;
 	}
 
-	public void setClazz(Clazz clazz) {
-		this.clazz = clazz;
+	public void setClazzVM(ClazzVM clazzVM) {
+		this.clazzVM = clazzVM;
 	}
 
 	public User getUser() {
@@ -142,34 +142,9 @@ public class SurveyVM {
 		this.fraction = fraction;
 	}
 
-	@Override
-	public String toString() {
-		return "SurveyVM [id=" + id + ", status=" + status + ", code=" + code + ", surveydate=" + surveydate
-				+ ", course=" + course + ", clazz=" + clazz + ", user=" + user + ", questionnaire=" + questionnaire
-				+ ", grade=" + grade + ", answers=" + answers + ", fraction=" + fraction + "]";
-	}
+	
 
-	public SurveyVM() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public SurveyVM(Long id, String status, String code, String surveydate, Course course, Clazz clazz, User user,
-			Questionnaire questionnaire, Grade grade, List<Answers> answers, int fraction) {
-		super();
-		this.id = id;
-		this.status = status;
-		this.code = code;
-		this.surveydate = surveydate;
-		this.course = course;
-		this.clazz = clazz;
-		this.user = user;
-		this.questionnaire = questionnaire;
-		this.grade = grade;
-		this.answers = answers;
-		this.fraction = fraction;
-	}
-
+	
 	
 
 	

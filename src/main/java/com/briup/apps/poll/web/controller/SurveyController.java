@@ -157,4 +157,12 @@ public class SurveyController {
 		}
 	}
 	
+	@PostMapping("SurveyExamine")
+	@ApiOperation(value="课调审核")
+	public MsgResponse SurveyExamine(Survey survey){
+		
+		return MsgResponse.error("haha");
+		
+	}
+	
 }
