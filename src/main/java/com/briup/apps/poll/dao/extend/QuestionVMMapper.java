@@ -56,5 +56,4 @@ public interface QuestionVMMapper {
 	 * @param id
 	 */
 	void deleteById(long id);
-
 }
