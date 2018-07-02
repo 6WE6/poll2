@@ -20,7 +20,7 @@ public class OptionsServiceImpl implements IOptionsService{
 	@Override
 	public List<Options> findAllOptions() throws Exception {
 		OptionsExample example = new OptionsExample();
-		return optionsMapper.selectByExample(example);
+		return optionsMapper.selectByExampleWithBLOBs(example);
 	}
 
 	@Override
