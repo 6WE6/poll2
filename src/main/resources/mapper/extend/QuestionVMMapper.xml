@@ -47,7 +47,7 @@
 	
 	<select id="selectQuestionVMByQuestionnaireId" parameterType="long" resultMap="questionVM">
 		select * from poll_question as qu
-		join poll_qq as qq on qu.id = qq.question_id
+		join poll_questionnaire_question as qq on qu.id = qq.question_id
 		where qq.questionnaire_id = #{questionnaireId};
 	</select>
 

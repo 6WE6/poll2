@@ -1,5 +1,7 @@
 package com.briup.apps.poll.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +65,17 @@ public class SurveyServiceImpl implements ISurveyService{
 			//更新
 			surveyMapper.updateByPrimaryKey(survey);
 		}else{
+			// status code surveyDate
+			survey.setStatus(Survey.STATUS_INIT);
+			//获取当前时间
+			Date now = new Date();
+			SimpleDateFormat sd = new SimpleDateFormat("yyyyMMddHHmmss");
+			String surveydateF = sd.format(now);
+			survey.setCode("KD"+surveydateF);
+			//获取当前时间
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String surveydateT = sdf.format(now);
+			survey.setSurveydate(surveydateT);  
 			//插入
 			surveyMapper.insert(survey);
 		}

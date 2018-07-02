@@ -10,11 +10,19 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value="课调")
 public class Survey {
 
+	//课调创建成功后的状态
+	public static final String STATUS_INIT = "未开启";
+	//点击开启按钮，意味着当前可以执行课调code
+	public static final String STATUS_BEGIN = "开启";
+	//当点击关闭按钮，意味着课调的关闭
+	public static final String STATUS_CHECK_UN = "未审核";
+	public static final String STATUS_CHECK_PASS = "审核通过";
+	public static final String STATUS_CHECK_NOPASS = "审核未通过";
 
 	@ApiModelProperty(value="主键自增策略")
     private Long id;
 
-	@ApiModelProperty(value="课调的状态，1为未开始，2为进行中，3为结束")
+	@ApiModelProperty(value="课调的状态")
     private String status;
 
 	@ApiModelProperty(value="课调编码，kd201862701")

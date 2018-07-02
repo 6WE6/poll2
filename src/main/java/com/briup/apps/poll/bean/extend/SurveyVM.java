@@ -22,7 +22,7 @@ public class SurveyVM {
 	@ApiModelProperty(value="主键自增策略")
     private Long id;
 
-	@ApiModelProperty(value="课调的状态，1为未开始，2为进行中，3为结束")
+	@ApiModelProperty(value="课调的状态")
     private String status;
 
 	@ApiModelProperty(value="课调编码，kd201862701")
