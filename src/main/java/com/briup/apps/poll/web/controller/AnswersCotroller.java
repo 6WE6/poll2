@@ -42,7 +42,7 @@ public class AnswersCotroller {
 	/*
 	 * 查询所有答题卡
 	 */
-	@ApiOperation(value = "查询所有答题卡信息", notes = "保存课程信息时无需输入id")
+	@ApiOperation(value = "查询所有答题卡信息", notes = "单表")
 	@GetMapping("/findAllAnswers")
 
 	public MsgResponse findAllAnswers() {
@@ -61,7 +61,7 @@ public class AnswersCotroller {
 	/*
 	 * 通过id查询答题卡
 	 */
-	@ApiOperation(value = "通过id查询答题卡")
+	@ApiOperation(value = "通过id查询答题卡", notes = "单表")
 	@GetMapping("/findAnswersById")
 	public MsgResponse findAnswersById(@RequestParam long id) {
 
@@ -76,7 +76,24 @@ public class AnswersCotroller {
 		}
 
 	}
+	/*
+	 * 通过seivey id查询答题卡
+	 */
+	@ApiOperation(value = "通过seivey id查询答题卡", notes = "单表")
+	@GetMapping("/findAnswersById")	
+	public MsgResponse findAnswersByServeyId(@RequestParam long id) {
 
+	List<Answers> list;
+	try {
+		list = answersService.findAnswersByServeyId(id);
+		return MsgResponse.success("success", list);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return MsgResponse.error(e.getMessage());
+	}
+
+	}
 	/*
 	 * 通过关键字查询答题卡
 	 */
