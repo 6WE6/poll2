@@ -2,12 +2,9 @@ package com.briup.apps.poll.bean.extend;
 
 import java.util.List;
 
+
 import com.briup.apps.poll.bean.Answers;
-import com.briup.apps.poll.bean.Clazz;
 import com.briup.apps.poll.bean.Course;
-import com.briup.apps.poll.bean.Grade;
-import com.briup.apps.poll.bean.Questionnaire;
-import com.briup.apps.poll.bean.Survey;
 import com.briup.apps.poll.bean.User;
 
 import io.swagger.annotations.ApiModel;

@@ -31,9 +31,9 @@ public class QuestionnaireQuestionController {
     @ApiOperation(value = "获取全部")
     public MsgResponse findAll(QuestionnaireQuestionExample QQ){
         try{
-            return new MsgResponse().success("200",questionnaireQuestionService.selectByExample(QQ));
+            return  MsgResponse.success("200",questionnaireQuestionService.selectByExample(QQ));
         }catch (Exception e){
-            return new MsgResponse().success("500",e.toString());
+            return  MsgResponse.success("500",e.toString());
         }
     }
 
@@ -46,9 +46,9 @@ public class QuestionnaireQuestionController {
     @GetMapping("findById")
     public MsgResponse findById(@RequestParam Long id){
         try{
-            return new MsgResponse().success("200",questionnaireQuestionService.selectByPrimaryKey(id));
+            return MsgResponse.success("200",questionnaireQuestionService.selectByPrimaryKey(id));
         }catch (Exception e){
-            return new MsgResponse().success("500",e.toString());
+            return  MsgResponse.success("500",e.toString());
         }
     }
 
@@ -61,9 +61,9 @@ public class QuestionnaireQuestionController {
     @ApiOperation(value = "通过id删除")
     public MsgResponse delById(@RequestParam Long id){
         try{
-            return new MsgResponse().success("200",questionnaireQuestionService.deleteByPrimaryKey(id));
+            return  MsgResponse.success("200",questionnaireQuestionService.deleteByPrimaryKey(id));
         }catch (Exception e){
-            return new MsgResponse().success("500",e.toString());
+            return  MsgResponse.success("500",e.toString());
         }
     }
 
@@ -76,9 +76,9 @@ public class QuestionnaireQuestionController {
     @ApiOperation(value = "更新")
     public MsgResponse update(QuestionnaireQuestion QQ){
         try{
-            return new MsgResponse().success("200",questionnaireQuestionService.updateByPrimaryKeySelective(QQ));
+            return  MsgResponse.success("200",questionnaireQuestionService.updateByPrimaryKeySelective(QQ));
         }catch (Exception e){
-            return new MsgResponse().success("500",e.toString());
+            return  MsgResponse.success("500",e.toString());
         }
     }
 
@@ -90,9 +90,9 @@ public class QuestionnaireQuestionController {
     @ApiOperation(value = "保存")
     public MsgResponse save(QuestionnaireQuestion QQ){
         try{
-            return new MsgResponse().success("200",questionnaireQuestionService.insert(QQ));
+            return  MsgResponse.success("200",questionnaireQuestionService.insert(QQ));
         }catch (Exception e){
-            return new MsgResponse().success("500",e.toString());
+            return  MsgResponse.success("500",e.toString());
         }
     }
 }
