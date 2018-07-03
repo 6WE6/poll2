@@ -41,10 +41,7 @@ public class SurveyVM {
 	private User user;
 
 	@ApiModelProperty(value="课调的问卷")
-	private Questionnaire questionnaire;
-
-	@ApiModelProperty(value="课调的班级的年级")
-	private Grade grade;
+	private QuestionnaireVM questionnaireVM;
 
 	//peng
 	@ApiModelProperty(value="课调的答题卡")
@@ -54,9 +51,12 @@ public class SurveyVM {
 	@ApiModelProperty(value="课调的平均分")
 	private int fraction;
 
+	//get和set方法
 	public Long getId() {
 		return id;
 	}
+
+	
 
 	public void setId(Long id) {
 		this.id = id;
@@ -110,21 +110,14 @@ public class SurveyVM {
 		this.user = user;
 	}
 
-	public Questionnaire getQuestionnaire() {
-		return questionnaire;
+	public QuestionnaireVM getQuestionnaireVM() {
+		return questionnaireVM;
 	}
 
-	public void setQuestionnaire(Questionnaire questionnaire) {
-		this.questionnaire = questionnaire;
+	public void setQuestionnaireVM(QuestionnaireVM questionnaireVM) {
+		this.questionnaireVM = questionnaireVM;
 	}
 
-	public Grade getGrade() {
-		return grade;
-	}
-
-	public void setGrade(Grade grade) {
-		this.grade = grade;
-	}
 
 	public List<Answers> getAnswers() {
 		return answers;
@@ -143,10 +136,5 @@ public class SurveyVM {
 	}
 
 	
-
 	
-	
-
-	
-
 }

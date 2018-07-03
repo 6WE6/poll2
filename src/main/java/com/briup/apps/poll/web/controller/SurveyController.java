@@ -162,12 +162,62 @@ public class SurveyController {
 		}
 	}
 	
-	@PostMapping("SurveyExamine")
+	@GetMapping("SurveyExamine")
 	@ApiOperation(value="课调审核")
-	public MsgResponse SurveyExamine(Survey survey){
+	public MsgResponse SurveyExamine(@RequestParam Long id){
 		
-		return MsgResponse.error("haha");
+		/*try{
+			if()
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}*/
+		return MsgResponse.success("课调开启成功", null);
 		
 	}
 	
+	@GetMapping("openSurvey")
+	@ApiOperation(value="通过课调id开启课调")
+	public MsgResponse openSurvey(@RequestParam Long id){
+		try {
+			//先查，在判断，在改变状态
+			Survey survey=surveyService.findSurveyById(id);	
+			//审核状态为未开启或审核通过可以开启
+			if(survey.getStatus().equals(Survey.STATUS_INIT) || survey.getStatus().equals(Survey.STATUS_CHECK_PASS))
+			{
+				//设置课调编码
+				String code=survey.getId().toString();
+				survey.setCode(code);
+				survey.setStatus(Survey.STATUS_BEGIN);
+				surveyService.saveOrUpdateSurvey(survey);	
+				return MsgResponse.success("课调开启成功", null);
+			}else{
+				return MsgResponse.success("课调已经开启", null);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
+	@GetMapping("closeSurvey")
+	@ApiOperation(value="通过课调id关闭课调")
+	public MsgResponse closeSurvey(@RequestParam Long id){
+		try {
+			//先查，在判断，在改变状态
+			Survey survey=surveyService.findSurveyById(id);	
+			//审核状态为开启时可以关闭，其他不可以
+			if(survey.getStatus().equals(Survey.STATUS_BEGIN))
+			{
+				survey.setStatus(Survey.STATUS_INIT);
+				surveyService.saveOrUpdateSurvey(survey);	
+				return MsgResponse.success("课调关闭成功", null);
+			}else{
+				return MsgResponse.success("课调已经关闭", null);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
 }

@@ -3,109 +3,115 @@
 <mapper namespace="com.briup.apps.poll.dao.extend.SurveyVMMapper">
 	<select id="findAll" resultMap="surveyVMResultType">
 		select
-			*
-		from 
-			poll_survey 
+		*
+		from
+		poll_survey
 	</select>
-	
-	<select id="findById" resultMap="surveyVMResultType" parameterType="Long">
+
+	<select id="findById" resultMap="surveyVMResultType"
+		parameterType="Long">
 		select
-			*
-		from 
-			poll_survey 
-		where 
-			id = #{id}
+		*
+		from
+		poll_survey
+		where
+		id = #{id}
 	</select>
 
 	<select id="findSurveyByKeyword" resultMap="surveyVMResultType"
 		parameterType="java.lang.String">
 		select
-			g.name g_name,c1.name c1_name,c2.name c2_name,q.name q_name,u.name u_name,s.surveydate s_surveydate,
-			s.status s_status,s.code s_code,
-			s.id s_id,c1.id c1_id,c2.id c2_id,u.id u_id,q.id q_id,g.id g_id
-		from 
-			poll_survey s, poll_user u , poll_clazz c1 ,poll_grade g,poll_course c2 ,poll_questionnaire q
-		where 
-			s.user_id = u.id 
+		g.name g_name,c1.name c1_name,c2.name c2_name,q.name q_name,u.name
+		u_name,s.surveydate s_surveydate,
+		s.status s_status,s.code s_code,
+		s.id s_id,c1.id c1_id,c2.id c2_id,u.id u_id,q.id q_id,g.id g_id
+		from
+		poll_survey s, poll_user u , poll_clazz c1 ,poll_grade g,poll_course
+		c2 ,poll_questionnaire q
+		where
+		s.user_id = u.id
 		and
-			s.clazz_id = c1.id 
-		and 
-			c1.grade_id = g.id 
+		s.clazz_id = c1.id
 		and
-			s.course_id = c2.id 
+		c1.grade_id = g.id
 		and
-			s.questionnaire_id = q.id 
+		s.course_id = c2.id
+		and
+		s.questionnaire_id = q.id
 		or
-			g.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' ) 
-		or 
-			c1.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' ) 
+		g.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' )
 		or
-			c2.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' ) 
-		or 
-			q.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' ) 
+		c1.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' )
 		or
-			u.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' ) 
+		c2.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' )
 		or
-			s.surveyDate like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' )
+		q.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' )
+		or
+		u.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' )
+		or
+		s.surveyDate like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' )
 	</select>
 
-	 <select id="findAllByIdAnswers" resultMap="answersResultType" parameterType="java.lang.Long">
-	 	select * from poll_survey where id = #{id}
+	<select id="findAllByIdAnswers" resultMap="answersResultType"
+		parameterType="java.lang.Long">
+		select * from poll_survey where id = #{id}
 	</select>
-	  
+
 	<!-- 获得课调的一些基本信息 -->
 	<resultMap id="surveyVMResultType" type="com.briup.apps.poll.bean.extend.SurveyVM">
-		
+
 		<id column="id" property="id" />
 		<result column="status" property="status" />
 		<result column="code" property="code" />
 		<result column="surveydate" property="surveydate" />
-		
+
 		<association property="course" javaType="com.briup.apps.poll.bean.Course"
-		 column="course_id" 
-		 select="com.briup.apps.poll.dao.CourseMapper.selectByPrimaryKey">
+			column="course_id" select="com.briup.apps.poll.dao.CourseMapper.selectByPrimaryKey">
 		</association>
 
-		<!-- psq修改  完善查询clazz-->
-		<association property="clazzVM"  javaType="com.briup.apps.poll.bean.extend.ClazzVM"
-			column="clazz_id" 
+		<!-- psq修改 完善查询clazz -->
+		<association property="clazzVM"
+			javaType="com.briup.apps.poll.bean.extend.ClazzVM" column="clazz_id"
 			select="com.briup.apps.poll.dao.extend.ClazzVMMapper.selectClazzVMById">
 		</association>
 
 		<association property="user" javaType="com.briup.apps.poll.bean.User"
-			column="user_id" 
-			select="com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey">
+			column="user_id" select="com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey">
 		</association>
 
 		<!-- psq修改 完善查询问卷调查表信息 -->
-		<association property="questionnaire" javaType="com.briup.apps.poll.bean.Questionnaire"
-			column="questionnaire_id"
-			select="com.briup.apps.poll.dao.QuestionnaireMapper.selectByPrimaryKey">
+		<association property="questionnaireVM"
+			javaType="com.briup.apps.poll.bean.extend.QuestionnaireVM" column="questionnaire_id"
+			select="com.briup.apps.poll.dao.extend.QuestionnaireVMMapper.selectQunById">
 		</association>
 
+		<!-- psq添加答题卡查询 -->
+		<collection property="answers" column="id" javaType="ArrayList"
+			ofType="com.briup.apps.poll.bean.Answers" select="selectAnswersBySurveyId">
+		</collection>
+
 	</resultMap>
-	
+
 	<!-- 获得课调的所有答题卡 -->
-	<resultMap type="com.briup.apps.poll.bean.extend.SurveyVM" id="answersResultType">
- 		<id column="id" property="id" />
+	<resultMap type="com.briup.apps.poll.bean.extend.SurveyVM"
+		id="answersResultType">
+		<id column="id" property="id" />
 		<result column="status" property="status" />
 		<result column="code" property="code" />
 		<result column="surveydate" property="surveydate" />
-      	<collection 
-          	column="id"
-          	property="answers" 
-          	javaType="ArrayList"
-          	ofType="com.briup.apps.poll.bean.extend.SurveyVM"
-          	select="selectAnswersBySurveyId"></collection>
-  	</resultMap>
-  	
-  	<!-- 获得课调的问卷的详细信息 -->
-	<resultMap type="com.briup.apps.poll.bean.extend.SurveyVM" id="questionnaireResultType">
- 		
-  	</resultMap>
-  	
-  	<select id="selectAnswersBySurveyId" parameterType="long" resultType="com.briup.apps.poll.bean.Answers">
-  		select * from poll_answers where survey_id = #{id,jdbcType=BIGINT}
-  	</select>
-  	
+		<collection column="id" property="answers" javaType="ArrayList"
+			ofType="com.briup.apps.poll.bean.extend.SurveyVM" select="selectAnswersBySurveyId"></collection>
+	</resultMap>
+
+	<!-- 获得课调的问卷的详细信息 -->
+	<resultMap type="com.briup.apps.poll.bean.extend.SurveyVM"
+		id="questionnaireResultType">
+
+	</resultMap>
+
+	<select id="selectAnswersBySurveyId" parameterType="long"
+		resultType="com.briup.apps.poll.bean.Answers">
+		select * from poll_answers where survey_id = #{id,jdbcType=BIGINT}
+	</select>
+
 </mapper>
