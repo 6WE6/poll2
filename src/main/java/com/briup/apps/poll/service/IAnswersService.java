@@ -14,9 +14,12 @@ public interface IAnswersService {
 	 * 查询所有答题卡
 	 */
 	List<Answers> findAll() throws Exception;
-
 	/*
-	 * 通过id查询答题卡
+	 * 通过课调id查询答题卡
+	 */
+	List<Answers> findAnswersByServeyId(long id) throws Exception;
+	/*
+	 * 通过查询答题卡
 	 */
 	Answers findAnswersById(long id) throws Exception;
 

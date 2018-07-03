@@ -19,6 +19,44 @@ public class AnswersServiceImpl implements IAnswersService{
 	private AnswersMapper answersMapper;
 	@Autowired
 	private AnswersVMMapper answersVMMapper;
+	
+	/**
+	 * 保存或更新答题卡信息
+	 */
+	@Override
+	public void saveOrUpdateAnswers(Answers answers) throws Exception {
+		// TODO Auto-generated method stub
+		if(answers.getId()!=null) {
+			//更新
+			answersMapper.updateByPrimaryKey(answers);
+		}else {
+			//添加
+			answersMapper.insert(answers);
+		}
+	}
+	/**
+	 * 通过id查询答题卡信息
+	 */
+	@Override
+	public Answers findAnswersById(long id) throws Exception {
+		// TODO Auto-generated method stub
+		return answersMapper.selectByPrimaryKey(id);
+	}	
+	
+	
+	
+	/**
+	 * 通过课调id查询答题卡信息
+	 */
+	@Override
+	public List<Answers> findAnswersByServeyId(long id) throws Exception {
+		// TODO Auto-generated method stub
+		AnswersExample example=new AnswersExample();
+		example.createCriteria().andSurveyIdEqualTo(id);
+		return answersMapper.selectByExample(example);
+
+	}
+	
 	/**
 	 * 按空模板查询所有答题卡信息(QBC查询)
 	 */
@@ -29,14 +67,7 @@ public class AnswersServiceImpl implements IAnswersService{
 		return answersMapper.selectByExample(example);
 	}
 	
-	/**
-	 * 通过id查询答题卡信息
-	 */
-	@Override
-	public Answers findAnswersById(long id) throws Exception {
-		// TODO Auto-generated method stub
-		return answersMapper.selectByPrimaryKey(id);
-	}
+	
 	/**
 	 * 通过关键字查询课程信息
 	 */
@@ -56,20 +87,7 @@ public class AnswersServiceImpl implements IAnswersService{
 	}
 
 	
-	/**
-	 * 保存或更新答题卡信息
-	 */
-	@Override
-	public void saveOrUpdateAnswers(Answers answers) throws Exception {
-		// TODO Auto-generated method stub
-		if(answers.getId()!=null) {
-			//更新
-			answersMapper.updateByPrimaryKey(answers);
-		}else {
-			//添加
-			answersMapper.insert(answers);
-		}
-	}
+	
 	/**
 	 * 通过id删除答题卡信息
 	 */
