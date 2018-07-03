@@ -63,6 +63,7 @@
 		<id column="id" property="id" />
 		<result column="status" property="status" />
 		<result column="code" property="code" />
+		<result column="average" property="average" />
 		<result column="surveydate" property="surveydate" />
 
 		<association property="course" javaType="com.briup.apps.poll.bean.Course"
@@ -98,6 +99,7 @@
 		<id column="id" property="id" />
 		<result column="status" property="status" />
 		<result column="code" property="code" />
+		<result column="average" property="average" />
 		<result column="surveydate" property="surveydate" />
 		<collection column="id" property="answers" javaType="ArrayList"
 			ofType="com.briup.apps.poll.bean.extend.SurveyVM" select="selectAnswersBySurveyId"></collection>

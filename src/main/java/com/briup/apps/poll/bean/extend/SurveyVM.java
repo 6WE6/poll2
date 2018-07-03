@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value="课调")
 public class SurveyVM {
 
+	
 	@ApiModelProperty(value="主键自增策略")
     private Long id;
 
@@ -27,6 +28,10 @@ public class SurveyVM {
 
 	@ApiModelProperty(value="课调编码，kd201862701")
     private String code;
+	
+	//分数 peng
+	@ApiModelProperty(value="课调的平均分")
+	 private Double average;
 
 	@ApiModelProperty(value="课调的日期，类型为sting")
     private String surveydate;
@@ -47,16 +52,14 @@ public class SurveyVM {
 	@ApiModelProperty(value="课调的答题卡")
 	private List<Answers> answers;
 
-	//	分数 peng
-	@ApiModelProperty(value="课调的平均分")
-	private int fraction;
+	
 
+	
+	
 	//get和set方法
 	public Long getId() {
 		return id;
 	}
-
-	
 
 	public void setId(Long id) {
 		this.id = id;
@@ -118,7 +121,6 @@ public class SurveyVM {
 		this.questionnaireVM = questionnaireVM;
 	}
 
-
 	public List<Answers> getAnswers() {
 		return answers;
 	}
@@ -127,14 +129,16 @@ public class SurveyVM {
 		this.answers = answers;
 	}
 
-	public int getFraction() {
-		return fraction;
+	public Double getAverage() {
+		return average;
 	}
 
-	public void setFraction(int fraction) {
-		this.fraction = fraction;
+	public void setAverage(Double average) {
+		this.average = average;
 	}
 
+	
+	
 	
 	
 }

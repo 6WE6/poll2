@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.briup.apps.poll.bean.Answers;
 import com.briup.apps.poll.bean.Survey;
 import com.briup.apps.poll.bean.extend.SurveyVM;
 import com.briup.apps.poll.service.ISurveyService;
@@ -166,13 +167,46 @@ public class SurveyController {
 	@ApiOperation(value="课调审核")
 	public MsgResponse SurveyExamine(@RequestParam Long id){
 		
-		/*try{
-			if()
+		try{
+			//先查，在判断，在改变状态
+			SurveyVM surveyVM=surveyService.findByIdSurveyVM(id);	
+			//课调状态为未开启时才可以审核
+			if(surveyVM.getStatus().equals(Survey.STATUS_INIT))
+			{
+				//1.显示分数
+				//获取答题卡集合
+				List<Answers> list=surveyVM.getAnswers();
+				//总的平均分
+				double average=0;
+				//循环遍历答题卡，得到平均分
+				for(Answers answer : list)
+				{
+					//单人平均分
+					double total=0;
+					//将字符串数组分割
+					String[] arr = answer.getSelections().split("[|]");
+					for(String a:arr)
+					{
+						total+=Integer.parseInt(a);
+					}
+					total=total/arr.length;
+					average+=total;
+				}
+				average=average/list.size();
+				//设置平均分
+				Survey survey=surveyService.findSurveyById(id);
+				survey.setAverage(average);
+				surveyService.saveOrUpdateSurvey(survey);
+				return MsgResponse.success("success",surveyService.findByIdSurveyVM(id));
+				
+			}else{
+				return MsgResponse.error("当前课调状态不可审核");
+			}
 			
 		}catch (Exception e) {
 			// TODO: handle exception
-		}*/
-		return MsgResponse.success("课调开启成功", null);
+			return MsgResponse.error(e.getMessage());
+		}
 		
 	}
 	
@@ -214,6 +248,48 @@ public class SurveyController {
 				return MsgResponse.success("课调关闭成功", null);
 			}else{
 				return MsgResponse.success("课调已经关闭", null);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
+	@GetMapping("nocheckSurvey")
+	@ApiOperation(value="通过课调id将课调改为审核未通过状态")
+	public MsgResponse nocheckSurvey(@RequestParam Long id){
+		try {
+			//先查，在判断，在改变状态
+			Survey survey=surveyService.findSurveyById(id);	
+			//审核状态为开启时可以关闭，其他不可以
+			if(survey.getStatus().equals(Survey.STATUS_INIT))
+			{
+				survey.setStatus(Survey.STATUS_CHECK_NOPASS);
+				surveyService.saveOrUpdateSurvey(survey);	
+				return MsgResponse.success("课调修改成功", null);
+			}else{
+				return MsgResponse.success("课调状态不是未关闭，请修改课调状态", null);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
+	@GetMapping("checkSurvey")
+	@ApiOperation(value="通过课调id将课调改为审核通过状态")
+	public MsgResponse checkSurvey(@RequestParam Long id){
+		try {
+			//先查，在判断，在改变状态
+			Survey survey=surveyService.findSurveyById(id);	
+			//审核状态为开启时可以关闭，其他不可以
+			if(survey.getStatus().equals(Survey.STATUS_INIT))
+			{
+				survey.setStatus(Survey.STATUS_CHECK_PASS);
+				surveyService.saveOrUpdateSurvey(survey);	
+				return MsgResponse.success("课调审核成功", null);
+			}else{
+				return MsgResponse.success("课调状态不是未关闭，请修改课调状态", null);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
