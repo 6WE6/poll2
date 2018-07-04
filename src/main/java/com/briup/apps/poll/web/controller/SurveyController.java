@@ -171,13 +171,13 @@ public class SurveyController {
 			//先查，在判断，在改变状态
 			SurveyVM surveyVM=surveyService.findByIdSurveyVM(id);	
 			//课调状态为未开启时才可以审核
-			if(surveyVM.getStatus().equals(Survey.STATUS_INIT))
+			if(surveyVM.getStatus().equals(Survey.STATUS_CHECK_UN))
 			{
 				//1.显示分数
 				//获取答题卡集合
 				List<Answers> list=surveyVM.getAnswers();
 				//总的平均分
-				double average=0;
+				double average=0.0;
 				//循环遍历答题卡，得到平均分
 				for(Answers answer : list)
 				{
@@ -192,10 +192,14 @@ public class SurveyController {
 					total=total/arr.length;
 					average+=total;
 				}
-				average=average/list.size();
+				average=average/list.size();	
+				if(Double.isNaN(average))
+				{
+					average=0;
+				}
 				//设置平均分
-				Survey survey=surveyService.findSurveyById(id);
-				survey.setAverage(average);
+				Survey survey=surveyService.findSurveyById(id);		
+				survey.setAverage(average);			
 				surveyService.saveOrUpdateSurvey(survey);
 				return MsgResponse.success("success",surveyService.findByIdSurveyVM(id));
 				
@@ -216,8 +220,8 @@ public class SurveyController {
 		try {
 			//先查，在判断，在改变状态
 			Survey survey=surveyService.findSurveyById(id);	
-			//审核状态为未开启或审核通过可以开启
-			if(survey.getStatus().equals(Survey.STATUS_INIT) || survey.getStatus().equals(Survey.STATUS_CHECK_PASS))
+			//审核状态为未开启才可以开启
+			if(survey.getStatus().equals(Survey.STATUS_INIT))
 			{
 				//设置课调编码
 				String code=survey.getId().toString();
@@ -243,7 +247,7 @@ public class SurveyController {
 			//审核状态为开启时可以关闭，其他不可以
 			if(survey.getStatus().equals(Survey.STATUS_BEGIN))
 			{
-				survey.setStatus(Survey.STATUS_INIT);
+				survey.setStatus(Survey.STATUS_CHECK_UN);
 				surveyService.saveOrUpdateSurvey(survey);	
 				return MsgResponse.success("课调关闭成功", null);
 			}else{
@@ -261,14 +265,14 @@ public class SurveyController {
 		try {
 			//先查，在判断，在改变状态
 			Survey survey=surveyService.findSurveyById(id);	
-			//审核状态为开启时可以关闭，其他不可以
-			if(survey.getStatus().equals(Survey.STATUS_INIT))
+			//审核状态未审核时才可以审核，其他不可以
+			if(survey.getStatus().equals(Survey.STATUS_CHECK_UN))
 			{
 				survey.setStatus(Survey.STATUS_CHECK_NOPASS);
 				surveyService.saveOrUpdateSurvey(survey);	
 				return MsgResponse.success("课调修改成功", null);
 			}else{
-				return MsgResponse.success("课调状态不是未关闭，请修改课调状态", null);
+				return MsgResponse.success("课调状态不正确，请修改课调状态", null);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -282,14 +286,14 @@ public class SurveyController {
 		try {
 			//先查，在判断，在改变状态
 			Survey survey=surveyService.findSurveyById(id);	
-			//审核状态为开启时可以关闭，其他不可以
-			if(survey.getStatus().equals(Survey.STATUS_INIT))
+			//审核状态未审核时才可以审核，其他不可以
+			if(survey.getStatus().equals(Survey.STATUS_CHECK_UN))
 			{
 				survey.setStatus(Survey.STATUS_CHECK_PASS);
 				surveyService.saveOrUpdateSurvey(survey);	
 				return MsgResponse.success("课调审核成功", null);
 			}else{
-				return MsgResponse.success("课调状态不是未关闭，请修改课调状态", null);
+				return MsgResponse.success("课调状态不正确，请修改课调状态", null);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
