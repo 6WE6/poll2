@@ -296,4 +296,34 @@ public class SurveyController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
+	
+	@ApiOperation(value="通过班级Id查询出该班级下所有已经审核的课调")
+	@GetMapping("findSurveyByClazzId")	
+	public MsgResponse findSurveyByClazzId(long id){
+		try {
+			//
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 }
