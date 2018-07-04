@@ -59,7 +59,7 @@
 	
 	<select id="selectByClazzIdAndCheckPass"  resultMap="surveyVMBaseResultType">
 		select * from poll_survey 
-		where id = #{id}
+		where clazz_id = #{id}
 		and status='审核通过'
 	</select>
 	
