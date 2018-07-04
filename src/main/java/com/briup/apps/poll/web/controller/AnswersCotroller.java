@@ -80,8 +80,8 @@ public class AnswersCotroller {
 	 * 通过seivey id查询答题卡
 	 */
 	@ApiOperation(value = "通过seivey id查询答题卡", notes = "单表")
-	@GetMapping("/findAnswersById")	
-	public MsgResponse findAnswersByServeyId(@RequestParam long id) {
+	@GetMapping("/findAnswersBySurveyId")	
+	public MsgResponse findAnswersBySurveyId(@RequestParam long id) {
 
 	List<Answers> list;
 	try {
