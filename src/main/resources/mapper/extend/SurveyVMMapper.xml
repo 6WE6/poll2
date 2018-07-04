@@ -98,6 +98,7 @@
 
 	</resultMap>
 	
+
 	<!-- 获得课调的所有答题卡 -->
 	<resultMap type="com.briup.apps.poll.bean.extend.SurveyVM"
 		id="answersResultType">
