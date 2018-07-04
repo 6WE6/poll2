@@ -18,4 +18,5 @@ public interface SurveyVMMapper {
 	 * 审核通过
 	 */
 	List<SurveyVM> selectByClazzIdAndCheckPass(long id);
+
 }
