@@ -2,6 +2,7 @@ package com.briup.apps.poll.service.impl;
 
 import java.text.SimpleDateFormat;
 
+
 import java.util.Date;
 import java.util.List;
 
@@ -131,6 +132,10 @@ public class SurveyServiceImpl implements ISurveyService{
 	public SurveyVM findByIdSurveyVM(Long id) throws Exception {
 		return surveyVMMapper.findById(id);
 	}
-
+	@Override
+	public List<SurveyVM> findByClazzIdAndCheckPass(long id) throws Exception {
+		return surveyVMMapper.selectByClazzIdAndCheckPass(id);
+	}
+	
 
 }

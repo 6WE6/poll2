@@ -301,11 +301,12 @@ public class SurveyController {
 	@GetMapping("findSurveyByClazzId")	
 	public MsgResponse findSurveyByClazzId(long id){
 		try {
-			//
+			List<SurveyVM> list=surveyService.findByClazzIdAndCheckPass(id);
+			return MsgResponse.success("success", list);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
 		}
-		return null;
 	}
 	
 		
