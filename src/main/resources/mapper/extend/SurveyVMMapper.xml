@@ -58,7 +58,7 @@
 	</select>
 
 	<!-- 获得课调的一些基本信息 -->
-	<resultMap id="surveyVMResultType" type="com.briup.apps.poll.bean.extend.SurveyVM">
+	<resultMap id="surveyVMBaseResultType" type="com.briup.apps.poll.bean.extend.SurveyVM">
 
 		<id column="id" property="id" />
 		<result column="status" property="status" />
@@ -80,6 +80,11 @@
 			column="user_id" select="com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey">
 		</association>
 
+	</resultMap>
+		
+	<!-- 方法的继承 -->
+	<resultMap id="surveyVMResultType" extends="surveyVMBaseResultType" type="com.briup.apps.poll.bean.extend.SurveyVM">
+
 		<!-- psq修改 完善查询问卷调查表信息 -->
 		<association property="questionnaireVM"
 			javaType="com.briup.apps.poll.bean.extend.QuestionnaireVM" column="questionnaire_id"
@@ -92,7 +97,7 @@
 		</collection>
 
 	</resultMap>
-
+	
 	<!-- 获得课调的所有答题卡 -->
 	<resultMap type="com.briup.apps.poll.bean.extend.SurveyVM"
 		id="answersResultType">
