@@ -56,7 +56,13 @@
 		parameterType="java.lang.Long">
 		select * from poll_survey where id = #{id}
 	</select>
-
+	
+	<select id="selectByClazzIdAndCheckPass"  resultMap="surveyVMBaseResultType">
+		select * from poll_survey 
+		where clazz_id = #{id}
+		and status='审核通过'
+	</select>
+	
 	<!-- 获得课调的一些基本信息 -->
 	<resultMap id="surveyVMBaseResultType" type="com.briup.apps.poll.bean.extend.SurveyVM">
 
@@ -98,6 +104,7 @@
 
 	</resultMap>
 	
+
 	<!-- 获得课调的所有答题卡 -->
 	<resultMap type="com.briup.apps.poll.bean.extend.SurveyVM"
 		id="answersResultType">

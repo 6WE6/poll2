@@ -2,6 +2,7 @@ package com.briup.apps.poll.service.impl;
 
 import java.text.SimpleDateFormat;
 
+
 import java.util.Date;
 import java.util.List;
 
@@ -258,5 +259,10 @@ public class SurveyServiceImpl implements ISurveyService {
 			return "课调未查询到或者课调状态不是未审核";
 		}
 	}
+	@Override
+	public List<SurveyVM> findByClazzIdAndCheckPass(long id) throws Exception {
+		return surveyVMMapper.selectByClazzIdAndCheckPass(id);
+	}
+	
 
 }

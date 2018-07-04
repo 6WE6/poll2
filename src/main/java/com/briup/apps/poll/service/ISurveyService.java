@@ -75,6 +75,10 @@ public interface ISurveyService {
 	 * @throws Exception
 	 */
 	SurveyVM findByIdSurveyVM(Long id) throws Exception;
+	/**
+	 * 审核通过
+	 */
+	List<SurveyVM> findByClazzIdAndCheckPass(long id) throws Exception;
 	
 	/**
 	 * 通过id审核课调，返回课调扩展类的信息
