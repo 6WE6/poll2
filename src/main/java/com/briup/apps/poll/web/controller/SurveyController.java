@@ -168,47 +168,15 @@ public class SurveyController {
 	public MsgResponse SurveyExamine(@RequestParam Long id){
 		
 		try{
-			//先查，在判断，在改变状态
-			SurveyVM surveyVM=surveyService.findByIdSurveyVM(id);	
-			//课调状态为未开启时才可以审核
-			if(surveyVM.getStatus().equals(Survey.STATUS_CHECK_UN))
+			if(surveyService.checkSurvey(id)==null)
 			{
-				//1.显示分数
-				//获取答题卡集合
-				List<Answers> list=surveyVM.getAnswers();
-				//总的平均分
-				double average=0.0;
-				//循环遍历答题卡，得到平均分
-				for(Answers answer : list)
-				{
-					//单人平均分
-					double total=0;
-					//将字符串数组分割
-					String[] arr = answer.getSelections().split("[|]");
-					for(String a:arr)
-					{
-						total+=Integer.parseInt(a);
-					}
-					total=total/arr.length;
-					average+=total;
-				}
-				average=average/list.size();	
-				if(Double.isNaN(average))
-				{
-					average=0;
-				}
-				//设置平均分
-				Survey survey=surveyService.findSurveyById(id);		
-				survey.setAverage(average);			
-				surveyService.saveOrUpdateSurvey(survey);
-				return MsgResponse.success("success",surveyService.findByIdSurveyVM(id));
-				
+				return MsgResponse.success("课调未查询到或者课调状态不是未审核", null);
 			}else{
-				return MsgResponse.error("当前课调状态不可审核");
+				return MsgResponse.success("success", surveyService.checkSurvey(id));
 			}
 			
 		}catch (Exception e) {
-			// TODO: handle exception
+			// 
 			return MsgResponse.error(e.getMessage());
 		}
 		
@@ -218,20 +186,7 @@ public class SurveyController {
 	@ApiOperation(value="通过课调id开启课调")
 	public MsgResponse openSurvey(@RequestParam Long id){
 		try {
-			//先查，在判断，在改变状态
-			Survey survey=surveyService.findSurveyById(id);	
-			//审核状态为未开启才可以开启
-			if(survey.getStatus().equals(Survey.STATUS_INIT))
-			{
-				//设置课调编码
-				String code=survey.getId().toString();
-				survey.setCode(code);
-				survey.setStatus(Survey.STATUS_BEGIN);
-				surveyService.saveOrUpdateSurvey(survey);	
-				return MsgResponse.success("课调开启成功", null);
-			}else{
-				return MsgResponse.success("课调已经开启", null);
-			}
+			return MsgResponse.success(surveyService.openSurvey(id), null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
@@ -242,38 +197,7 @@ public class SurveyController {
 	@ApiOperation(value="通过课调id关闭课调")
 	public MsgResponse closeSurvey(@RequestParam Long id){
 		try {
-			//先查，在判断，在改变状态
-			Survey survey=surveyService.findSurveyById(id);	
-			//审核状态为开启时可以关闭，其他不可以
-			if(survey.getStatus().equals(Survey.STATUS_BEGIN))
-			{
-				survey.setStatus(Survey.STATUS_CHECK_UN);
-				surveyService.saveOrUpdateSurvey(survey);	
-				return MsgResponse.success("课调关闭成功", null);
-			}else{
-				return MsgResponse.success("课调已经关闭", null);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
-		}
-	}
-	
-	@GetMapping("nocheckSurvey")
-	@ApiOperation(value="通过课调id将课调改为审核未通过状态")
-	public MsgResponse nocheckSurvey(@RequestParam Long id){
-		try {
-			//先查，在判断，在改变状态
-			Survey survey=surveyService.findSurveyById(id);	
-			//审核状态未审核时才可以审核，其他不可以
-			if(survey.getStatus().equals(Survey.STATUS_CHECK_UN))
-			{
-				survey.setStatus(Survey.STATUS_CHECK_NOPASS);
-				surveyService.saveOrUpdateSurvey(survey);	
-				return MsgResponse.success("课调修改成功", null);
-			}else{
-				return MsgResponse.success("课调状态不正确，请修改课调状态", null);
-			}
+			return MsgResponse.success(surveyService.closeSurvey(id), null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
@@ -281,20 +205,10 @@ public class SurveyController {
 	}
 	
 	@GetMapping("checkSurvey")
-	@ApiOperation(value="通过课调id将课调改为审核通过状态")
-	public MsgResponse checkSurvey(@RequestParam Long id){
+	@ApiOperation(value="通过课调id将课调改为审核通过状态或审核未通过状态，输入的results必须为1或者0")
+	public MsgResponse checkSurvey(@RequestParam Long id,int results){
 		try {
-			//先查，在判断，在改变状态
-			Survey survey=surveyService.findSurveyById(id);	
-			//审核状态未审核时才可以审核，其他不可以
-			if(survey.getStatus().equals(Survey.STATUS_CHECK_UN))
-			{
-				survey.setStatus(Survey.STATUS_CHECK_PASS);
-				surveyService.saveOrUpdateSurvey(survey);	
-				return MsgResponse.success("课调审核成功", null);
-			}else{
-				return MsgResponse.success("课调状态不正确，请修改课调状态", null);
-			}
+			return MsgResponse.success(surveyService.resultsOfSurvey(id, results), null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
@@ -307,7 +221,7 @@ public class SurveyController {
 		try {
 			//
 		} catch (Exception e) {
-			// TODO: handle exception
+			// 
 		}
 		return null;
 	}
