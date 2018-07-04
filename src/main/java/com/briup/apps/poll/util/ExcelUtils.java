@@ -23,20 +23,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * ClassName:ExcelUtils <br/>
- * Function: TODO ADD FUNCTION. <br/>
- * Reason: TODO ADD REASON. <br/>
- * Date: 2018年7月3日 上午8:57:12 <br/>
- * 
- * @author lichunyu
+ * @author yun
  * @version
- * @since JDK 1.6
- * @see
  */
 @SuppressWarnings("deprecation")
 public class ExcelUtils {
 	/**
 	 * 要求excel版本在2007以上
-	 *
 	 * @param file
 	 *            文件信息
 	 * @return

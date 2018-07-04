@@ -4,7 +4,11 @@ import java.util.List;
 
 import com.briup.apps.poll.bean.Answers;
 import com.briup.apps.poll.bean.extend.SurveyVM;
-
+/**
+ * 课调和答案的VM
+ * @author yun
+ *
+ */
 public class SurveyAndAnswersVM {
 	private SurveyVM surveyVM;
 	private List<Answers> answers;
