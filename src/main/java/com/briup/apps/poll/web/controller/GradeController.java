@@ -1,6 +1,7 @@
 package com.briup.apps.poll.web.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,8 +132,8 @@ public class GradeController {
 	@PostMapping("saveOrUpdateGrade")
 	public MsgResponse saveOrUpdateGrade(Grade grade) {
 		try {
-			gradeService.saveOrUpdateGrade(grade);
-			return MsgResponse.success("success", null);
+			
+			return MsgResponse.success(gradeService.saveOrUpdateGrade(grade), null);
 		} catch (Exception e) {
 			//
 			e.printStackTrace();
@@ -148,10 +149,11 @@ public class GradeController {
 	 */
 	@ApiOperation(value = "批量删除年级信息")
 	@GetMapping("batchDeleteGrade")
-	public MsgResponse batchDeleteGrade(List<Long> ids) {
+	public MsgResponse batchDeleteGrade(Long[] ids) {
 		try {
-			gradeService.batchDeleteGrade(ids);
-			return MsgResponse.success("success", ids);
+			List staffsList = Arrays.asList(ids);
+			
+			return MsgResponse.success(gradeService.batchDeleteGrade(staffsList), null);
 		} catch (Exception e) {
 			//
 			e.printStackTrace();
@@ -172,8 +174,11 @@ public class GradeController {
 		try {
 			GradeVM gradeVM = new GradeVM();
 			gradeVM = gradeService.findSchoolbyGrade(id);
-			return MsgResponse.success("success", gradeVM);
-
+			if(gradeVM==null){
+				return MsgResponse.success("not find", null);
+			}else{
+				return MsgResponse.success("success", gradeVM);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -181,17 +186,5 @@ public class GradeController {
 		}
 	}
 
-	/**
-	 * 根据年级id查询班级信息
-	 * 
-	 * @param id
-	 * @return
-	 */
-	@ApiOperation(value = "根据年级id查询班级信息")
-	@GetMapping("findClazzbyGrade")
-	public MsgResponse findClazzbyGrade(Long id) {
-		return null;
-
-	}
 
 }
