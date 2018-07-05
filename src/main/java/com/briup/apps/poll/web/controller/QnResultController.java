@@ -141,7 +141,7 @@ public class QnResultController {
 	
 	
 	
-	@ApiOperation(value="测试poi",notes="注意！测试的时候请将地址粘贴到浏览器地址栏测试",produces="application/octet-stream")
+/*	@ApiOperation(value="测试poi",notes="注意！测试的时候请将地址粘贴到浏览器地址栏测试",produces="application/octet-stream")
 	@GetMapping("testDownload")
 	public void testDownload(HttpServletResponse response) {
 		try {
@@ -198,7 +198,7 @@ public class QnResultController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	
 	@ApiOperation(value="下载问卷结果",notes="注意！测试的时候请将地址粘贴到浏览器地址栏测试",produces="application/octet-stream")
