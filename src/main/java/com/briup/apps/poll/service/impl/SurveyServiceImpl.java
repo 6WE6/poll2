@@ -71,9 +71,9 @@ public class SurveyServiceImpl implements ISurveyService {
 			survey.setStatus(Survey.STATUS_INIT);
 			// 获取当前时间
 			Date now = new Date();
-			SimpleDateFormat sd = new SimpleDateFormat("yyyyMMddHHmmss");
-			String surveydateF = sd.format(now);
-			survey.setCode("KD" + surveydateF);
+			//SimpleDateFormat sd = new SimpleDateFormat("yyyyMMddHHmmss");
+			//String surveydateF = sd.format(now);
+			survey.setCode("");
 			// 获取当前时间
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String surveydateT = sdf.format(now);

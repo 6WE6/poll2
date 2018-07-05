@@ -68,13 +68,13 @@ public interface ISurveyService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<SurveyVM> findAllByIdAnswers(Long id) throws Exception;
+	List<SurveyVM> findAllByIdAnswers(long id) throws Exception;
 	/**
 	 * 根据id查询所有课调的详细信息
 	 * @return
 	 * @throws Exception
 	 */
-	SurveyVM findByIdSurveyVM(Long id) throws Exception;
+	SurveyVM findByIdSurveyVM(long id) throws Exception;
 	/**
 	 * 审核通过
 	 */

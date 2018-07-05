@@ -54,8 +54,7 @@ public class CourseServiceImpl implements ICourseService{
 	@Override
 	public void saveOrUpdateCourse(Course course) throws Exception {
 		// TODO Auto-generated method stub
-		Course count= courseMapper.selectByPrimaryKey(course.getId());
-		if(count!=null){
+		if(course.getId()!=null){
 			//更新
 			courseMapper.updateByPrimaryKey(course);
 		}else{
