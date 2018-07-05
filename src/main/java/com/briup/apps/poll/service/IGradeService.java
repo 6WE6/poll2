@@ -41,7 +41,7 @@ public interface IGradeService
 	 * @return 
 	 * @throws Exception
 	 */
-	void saveOrUpdateGrade(Grade grade) throws Exception;
+	String saveOrUpdateGrade(Grade grade) throws Exception;
 	/**
 	 * 通过id删除年级信息
 	 * @param id
@@ -54,7 +54,7 @@ public interface IGradeService
 	 * @param grade
 	 * @throws Exception
 	 */
-	void batchDeleteGrade(List<Long> ids) throws Exception;
+	String batchDeleteGrade(List<Long> ids) throws Exception;
 	
 	/**
 	 * 根据年级信息查询学校和年级的信息

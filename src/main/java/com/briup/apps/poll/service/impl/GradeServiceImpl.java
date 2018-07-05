@@ -34,7 +34,13 @@ public class GradeServiceImpl implements IGradeService
 	public List<Grade> findAllGrade() throws Exception {
 		// 查询语句方法为selectByExampleWithBLOBs
 		GradeExample gradeExample=new GradeExample();
-		return gradeMapper.selectByExampleWithBLOBs(gradeExample);
+		if(gradeMapper.selectByExample(gradeExample)!=null){
+			return gradeMapper.selectByExampleWithBLOBs(gradeExample);
+		}else{
+			return null;
+		}
+		
+		
 	}
 	
 	/**
@@ -43,7 +49,12 @@ public class GradeServiceImpl implements IGradeService
 	@Override
 	public Grade findGradeById(long id) throws Exception {
 		// 	
-		return gradeMapper.selectByPrimaryKey(id);
+		if(gradeMapper.selectByPrimaryKey(id)==null){
+			return null;
+		}else{
+			return gradeMapper.selectByPrimaryKey(id);
+		}
+		
 		
 	}
 
@@ -51,7 +62,8 @@ public class GradeServiceImpl implements IGradeService
 	 * 根据关键字查找年级信息
 	 */
 	@Override
-	public List<Grade> findGradeByKeyword(String keywords) throws Exception {
+	public List<Grade> findGradeByKeyword(String keywords) throws Exception 
+	{
 		//添加条件：name属性中包含keywords关键字
 		GradeExample gradeExample = new GradeExample();	
 		gradeExample.createCriteria().andNameLike(keywords);
@@ -59,17 +71,27 @@ public class GradeServiceImpl implements IGradeService
 	}
 
 	/**
-	 * 保存年级信息
+	 * 保存或修改年级信息
 	 */
 	@Override
-	public void saveOrUpdateGrade(Grade grade) throws Exception {
+	public String saveOrUpdateGrade(Grade grade) throws Exception {
 		// 
 		if(grade.getId()!=null){
 			//更新
-			gradeMapper.updateByPrimaryKey(grade);
+			//判断是否存在
+			if(gradeMapper.selectByPrimaryKey(grade.getId())!=null)
+			{
+				gradeMapper.updateByPrimaryKeyWithBLOBs(grade);
+				return "更新成功";
+			}else{
+				return "更新失败，请确认年级ID";
+			}
+			
+			
 		}else{
-			//插入
-			gradeMapper.insert(grade);
+			//插入		
+			gradeMapper.insert(grade);	
+			return "插入成功";
 		}
 		
 	}
@@ -87,12 +109,21 @@ public class GradeServiceImpl implements IGradeService
 	 * 批量删除年级信息
 	 */
 	@Override
-	public void batchDeleteGrade(List<Long> ids) throws Exception {
-		// 迭代循环
+	public String batchDeleteGrade(List<Long> ids) throws Exception {
+		// 迭代循环查询
+		for(Long id:ids)
+		{
+			Grade grades = gradeMapper.selectByPrimaryKey(id);
+			if(grades==null){
+				return "输入数据中有未查询到的年级";
+			}
+		}	
+		//迭代循环删除
 		for(Long id:ids)
 		{
 			gradeMapper.deleteByPrimaryKey(id);
 		}
+		return "删除成功";
 		
 	}
 	
