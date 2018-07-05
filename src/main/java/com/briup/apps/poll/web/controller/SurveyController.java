@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.briup.apps.poll.bean.Answers;
 import com.briup.apps.poll.bean.Survey;
 import com.briup.apps.poll.bean.extend.SurveyVM;
+import com.briup.apps.poll.service.IAnswersService;
 import com.briup.apps.poll.service.ISurveyService;
 import com.briup.apps.poll.util.MsgResponse;
 
@@ -30,6 +32,10 @@ public class SurveyController {
 
 	@Autowired
 	private ISurveyService surveyService;
+	
+	@Autowired
+	private IAnswersService answersService;
+	
 	// @author yun
 	@GetMapping("findAllSurvey")
 	@ApiOperation(value="查询所有课调信息",notes="保存课调信息时无需输入id")
@@ -223,6 +229,37 @@ public class SurveyController {
 			return MsgResponse.success("success", list);
 		} catch (Exception e) {
 			// 
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
+	@ApiOperation(value="去审核课调",notes="返回课调基本信息以及课调中的主观题答案")
+	@GetMapping(value="toCheckSurvey")
+	public MsgResponse toCheckSurvey(long id){
+		try {
+			SurveyVM surveyVM = surveyService.findByIdSurveyVM(id);
+			List<Answers> answers = answersService.findAnswersByServeyId(id);
+			double total = 0.0;
+			for(Answers answer : answers){
+				// 5|4
+				String selectStr = answer.getSelections();
+				if(selectStr!=null){
+					String[] arr = selectStr.split("[|]");
+					Double singleTotal = 0.0;
+					for(String a : arr){
+						int select = Integer.parseInt(a);
+						singleTotal += select;
+					}
+					double singleAverage = singleTotal/arr.length;
+					total += singleAverage;
+				}
+			}
+			double average = total / answers.size();
+			surveyVM.setAverage(average);
+			return MsgResponse.success("success", surveyVM);
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 		}

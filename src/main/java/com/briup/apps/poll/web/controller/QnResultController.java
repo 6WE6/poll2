@@ -1,12 +1,3 @@
-/**
- * Project Name:poll3
- * File Name:QnResultController.java
- * Package Name:com.briup.apps.poll.web.controller
- * Date:2018年7月3日上午8:42:49
- * Copyright (c) 2018, chenzhou1025@126.com All Rights Reserved.
- *
-*/
-
 package com.briup.apps.poll.web.controller;
 
 import java.io.OutputStream;
