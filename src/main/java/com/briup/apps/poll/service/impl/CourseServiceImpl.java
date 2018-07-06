@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.briup.apps.poll.bean.Course;
 import com.briup.apps.poll.bean.CourseExample;
+import com.briup.apps.poll.bean.User;
 import com.briup.apps.poll.dao.CourseMapper;
 import com.briup.apps.poll.service.ICourseService;
 
@@ -45,7 +46,7 @@ public class CourseServiceImpl implements ICourseService{
 		// TODO Auto-generated method stub
 		CourseExample example = new CourseExample();
 		//添加条件：name属性中包含keywords关键字,模糊查询
-		example.createCriteria().andNameLike(keywords);
+		example.createCriteria().andNameLike("%"+keywords+"%");
 		return courseMapper.selectByExampleWithBLOBs(example);
 	}
 	/**
@@ -54,9 +55,10 @@ public class CourseServiceImpl implements ICourseService{
 	@Override
 	public void saveOrUpdateCourse(Course course) throws Exception {
 		// TODO Auto-generated method stub
-		if(course.getId()!=null){
+		Course count= courseMapper.selectByPrimaryKey(course.getId());
+		if(count!=null){
 			//更新
-			courseMapper.updateByPrimaryKey(course);
+			courseMapper.updateByPrimaryKeyWithBLOBs(course);
 		}else{
 			//插入
 			courseMapper.insert(course);

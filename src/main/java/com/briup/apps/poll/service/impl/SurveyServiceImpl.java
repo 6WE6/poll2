@@ -121,7 +121,7 @@ public class SurveyServiceImpl implements ISurveyService {
 	 */
 	@Override
 	public List<SurveyVM> findSurveyVMByKeyword(String keywords) throws Exception {
-		return surveyVMMapper.findSurveyByKeyword(keywords);
+		return surveyVMMapper.findSurveyByKeyword("%"+keywords+"%");
 	}
 
 	/**
@@ -130,10 +130,12 @@ public class SurveyServiceImpl implements ISurveyService {
 	 * @return
 	 * @throws Exception
 	 */
+	/*
 	@Override
 	public List<SurveyVM> findAllByIdAnswers(Long id) throws Exception {
 		return surveyVMMapper.findAllByIdAnswers(id);
 	}
+	*/
 
 	/**
 	 * 查询所有课调详细信息通过id
@@ -141,10 +143,12 @@ public class SurveyServiceImpl implements ISurveyService {
 	 * @return
 	 * @throws Exception
 	 */
+	/*
 	@Override
 	public SurveyVM findByIdSurveyVM(Long id) throws Exception {
 		return surveyVMMapper.findById(id);
 	}
+	*/
 
 	/**
 	 * 课调审核
@@ -262,6 +266,18 @@ public class SurveyServiceImpl implements ISurveyService {
 	@Override
 	public List<SurveyVM> findByClazzIdAndCheckPass(long id) throws Exception {
 		return surveyVMMapper.selectByClazzIdAndCheckPass(id);
+	}
+
+	@Override
+	public List<SurveyVM> findAllByIdAnswers(long id) throws Exception {
+		// TODO Auto-generated method stub
+		return surveyVMMapper.findAllByIdAnswers(id);
+	}
+
+	@Override
+	public SurveyVM findByIdSurveyVM(long id) throws Exception {
+		// TODO Auto-generated method stub
+		return surveyVMMapper.findById(id);
 	}
 	
 
