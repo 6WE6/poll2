@@ -1,12 +1,3 @@
-/**
- * Project Name:poll3
- * File Name:ExcelUtils.java
- * Package Name:com.briup.apps.poll.util
- * Date:2018年7月3日上午8:57:12
- * Copyright (c) 2018, chenzhou1025@126.com All Rights Reserved.
- *
-*/
-
 package com.briup.apps.poll.util;
 
 import java.io.File;

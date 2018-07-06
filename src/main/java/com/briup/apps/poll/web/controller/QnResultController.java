@@ -1,12 +1,3 @@
-/**
- * Project Name:poll3
- * File Name:QnResultController.java
- * Package Name:com.briup.apps.poll.web.controller
- * Date:2018年7月3日上午8:42:49
- * Copyright (c) 2018, chenzhou1025@126.com All Rights Reserved.
- *
-*/
-
 package com.briup.apps.poll.web.controller;
 
 import java.io.OutputStream;
@@ -141,7 +132,7 @@ public class QnResultController {
 	
 	
 	
-	@ApiOperation(value="测试poi",notes="注意！测试的时候请将地址粘贴到浏览器地址栏测试",produces="application/octet-stream")
+/*	@ApiOperation(value="测试poi",notes="注意！测试的时候请将地址粘贴到浏览器地址栏测试",produces="application/octet-stream")
 	@GetMapping("testDownload")
 	public void testDownload(HttpServletResponse response) {
 		try {
@@ -198,7 +189,7 @@ public class QnResultController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	
 	@ApiOperation(value="下载问卷结果",notes="注意！测试的时候请将地址粘贴到浏览器地址栏测试",produces="application/octet-stream")

@@ -38,7 +38,7 @@
 		s.course_id = c2.id
 		and
 		s.questionnaire_id = q.id
-		or
+		and (
 		g.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' )
 		or
 		c1.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' )
@@ -50,6 +50,7 @@
 		u.name like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' )
 		or
 		s.surveyDate like CONCAT('%',#{keywords,jdbcType=VARCHAR},'%' )
+		)
 	</select>
 
 	<select id="findAllByIdAnswers" resultMap="answersResultType"
