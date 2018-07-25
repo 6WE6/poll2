@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.briup.apps.poll.bean.Course;
 import com.briup.apps.poll.bean.CourseExample;
-import com.briup.apps.poll.bean.User;
 import com.briup.apps.poll.dao.CourseMapper;
 import com.briup.apps.poll.service.ICourseService;
 

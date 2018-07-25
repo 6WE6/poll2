@@ -8,7 +8,7 @@
 
   <context id="DB2Tables" targetRuntime="MyBatis3">
     <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-        connectionURL="jdbc:mysql://127.0.0.1:3306/poll2.0"
+        connectionURL="jdbc:mysql://119.29.225.173:3306/poll2.0"
         userId="root"
         password="root">
     </jdbcConnection>
